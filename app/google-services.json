@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "692630145160",
+    "project_id": "loan-app-dbee5",
+    "storage_bucket": "loan-app-dbee5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:692630145160:android:896269a4914638dd9eb73d",
+        "android_client_info": {
+          "package_name": "com.example.myloan_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "692630145160-lc28etjihd8a35ppd0qgg1vc2gq1mado.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.myloan_app",
+            "certificate_hash": "7c7ac297e5f52377e4335c691c7795b5677f12b5"
+          }
+        },
+        {
+          "client_id": "692630145160-5ub4m22g5te3s6vrd11t4314d8vpj1pv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDiK1C84DgJEEmQZS5LtcGKHd6Frdm5bP8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "692630145160-5ub4m22g5te3s6vrd11t4314d8vpj1pv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

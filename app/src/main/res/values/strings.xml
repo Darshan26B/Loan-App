@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">MY Loan-App</string>
+    <string name="welcome">Welcome\n My Loan-App</string>
+    <string name="UserName">Name</string>
+    <string name="UserLastName">Last Name</string>
+    <string name="UserEmailID">E-mail ID</string>
+    <string name="UserPhoneNumber">Number</string>
+    <string name="UserPinCode">Pin Code</string>
+    <string name="send_otp">Send OTP</string>
+    <string name="verify_otp">Verify OTP</string>
+    <string name="policy">By creating an account you agree to our Terms of Service and Privacy Policy.</string>
+    <string name="google_sign">Sign in With Google</string>/>
+    <string name="default_web_client_id" translatable="false">692630145160-5ub4m22g5te3s6vrd11t4314d8vpj1pv.apps.googleusercontent.com</string>
+    <string name="Loan">Enter Your Required Loan Amount!</string>
+    <string name="loan_amount">Loan Amount</string>
+</resources>
