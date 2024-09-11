@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".GenderActivity">
+
+    <TextView
+        android:id="@+id/txt_gender"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/gender_male"
+        android:layout_marginHorizontal="@dimen/_15sdp"
+        android:layout_marginBottom="@dimen/_25sdp"
+        android:text="@string/gender"
+        android:textAlignment="center"
+        android:textColor="@color/blue"
+        android:textSize="@dimen/_20sdp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:layout_width="@dimen/_40sdp"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_above="@+id/gender_male"
+        android:layout_alignEnd="@+id/txt_gender"
+        android:padding="@dimen/_5sdp"
+        android:src="@drawable/gender" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/gender_male"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/gender_feMale"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:background="@drawable/bg_item"
+        android:ems="5"
+        android:padding="@dimen/_5sdp"
+        android:text="@string/male"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_20sdp" />
+
+    <ImageView
+        android:id="@+id/right_male"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/gender_male"
+        android:layout_alignEnd="@+id/gender_male"
+        android:src="@drawable/right" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/gender_feMale"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/gender_other"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:background="@drawable/bg_item"
+        android:ems="5"
+        android:padding="@dimen/_5sdp"
+        android:text="@string/female"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_20sdp" />
+
+    <ImageView
+        android:id="@+id/right_feMale"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/gender_feMale"
+        android:layout_alignEnd="@+id/gender_feMale"
+        android:src="@drawable/right" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/gender_other"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btn_nextGender"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_marginBottom="@dimen/_50sdp"
+        android:background="@drawable/bg_item"
+        android:ems="5"
+        android:padding="@dimen/_5sdp"
+        android:text="@string/other"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_20sdp" />
+
+    <ImageView
+        android:id="@+id/right_other"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/gender_other"
+        android:layout_alignEnd="@+id/gender_other"
+        android:src="@drawable/right" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_nextGender"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btn_backGender"
+        android:layout_marginHorizontal="@dimen/_18sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:backgroundTint="@color/blue"
+        android:paddingVertical="@dimen/_10sdp"
+        android:text="@string/next"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_15sdp"
+        app:cornerRadius="@dimen/_10sdp" />
+
+    <TextView
+        android:id="@+id/btn_backGender"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="@dimen/_80sdp"
+        android:text="@string/back"
+        android:textSize="@dimen/_15sdp" />
+
+
+</RelativeLayout>

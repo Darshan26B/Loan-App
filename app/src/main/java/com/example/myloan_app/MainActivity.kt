@@ -39,9 +39,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var userGoogleClick: LinearLayout
     private lateinit var userPolicyClick: CheckBox
     private lateinit var userOTP: OTPTextView
-    private lateinit var sharedP:SharedPreferences
-    private lateinit var editor: Editor
-    lateinit var auth: FirebaseAuth
+    private lateinit var sharedP:SharedPref
+     lateinit var auth: FirebaseAuth
     lateinit var GoogleSignInClient: GoogleSignInClient
     private val RC_SIGN_IN = 100
 
@@ -64,12 +63,11 @@ class MainActivity : AppCompatActivity() {
         userOTP = findViewById(R.id.otp_view)
 
 
+        sharedP = SharedPref(this)
 
         auth = FirebaseAuth.getInstance()
-        sharedP = getSharedPreferences("MYData", MODE_PRIVATE)
         userOTP.visibility = View.GONE
 
-        editor = sharedP.edit()
 
         val user = auth.currentUser
         if (user != null) {
@@ -117,10 +115,10 @@ class MainActivity : AppCompatActivity() {
                 if (task.isSuccessful) {
                     val intent = Intent(this, DetailActivity::class.java)
 
-                    editor.putString("Name", account.givenName)
-                    editor.putString("LastName", account.familyName)
-                    editor.putString("Email", account.email)
-                    editor.apply()
+                    sharedP.saveData("Name", account.givenName.toString())
+                    sharedP.saveData("LastName", account.familyName.toString())
+                    sharedP.saveData("Email", account.email.toString())
+
 
                     startActivity(intent)
                     finish()

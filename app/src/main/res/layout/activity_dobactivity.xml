@@ -5,47 +5,43 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoanAmountActivity">
+    tools:context=".DOBActivity">
 
     <TextView
-        android:id="@+id/txt_Loan"
+        android:id="@+id/txt_DOB"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/txtInputLoan"
-        android:layout_marginHorizontal="@dimen/_20sdp"
-        android:text="@string/Loan"
+        android:layout_above="@+id/DOB_Picker"
+        android:layout_marginHorizontal="@dimen/_15sdp"
+        android:text="@string/DOB"
+        android:layout_marginBottom="@dimen/_5sdp"
         android:textColor="@color/blue"
         android:textSize="@dimen/_20sdp"
         android:textStyle="bold" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/txtInputLoan"
-        android:layout_width="match_parent"
+    <ImageView
+        android:layout_width="@dimen/_40sdp"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_above="@+id/DOB_Picker"
+        android:layout_alignEnd="@+id/txt_DOB"
+        android:padding="@dimen/_5sdp"
+
+        android:src="@drawable/birthday" />
+
+    <DatePicker
+        android:id="@+id/DOB_Picker"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/btn_next"
-        android:layout_marginHorizontal="@dimen/_18sdp"
-        android:layout_marginTop="@dimen/_20sdp"
-        android:layout_marginBottom="@dimen/_100sdp"
-        android:hint="@string/loan_amount"
-        android:textColorHint="@color/strokeColor"
-        app:endIconDrawable="@drawable/right"
-        app:endIconMode="custom"
-        app:endIconTint="@null">
+        android:layout_centerInParent="true"
+        android:calendarViewShown="false"
+        android:datePickerMode="spinner" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/txt_loanAmount"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/bg_item"
-            android:inputType="number" />
-
-    </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_next"
+        android:id="@+id/btn_nextDOB"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/btn_back"
+        android:layout_above="@+id/btn_backDOB"
         android:layout_marginHorizontal="@dimen/_18sdp"
         android:layout_marginTop="@dimen/_20sdp"
         android:layout_marginBottom="@dimen/_10sdp"
@@ -57,7 +53,7 @@
         app:cornerRadius="@dimen/_10sdp" />
 
     <TextView
-        android:id="@+id/btn_back"
+        android:id="@+id/btn_backDOB"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -65,5 +61,6 @@
         android:layout_marginBottom="@dimen/_80sdp"
         android:text="@string/back"
         android:textSize="@dimen/_15sdp" />
+
 
 </RelativeLayout>

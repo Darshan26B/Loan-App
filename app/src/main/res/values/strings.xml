@@ -12,5 +12,12 @@
     <string name="google_sign">Sign in With Google</string>/>
     <string name="default_web_client_id" translatable="false">692630145160-5ub4m22g5te3s6vrd11t4314d8vpj1pv.apps.googleusercontent.com</string>
     <string name="Loan">Enter Your Required Loan Amount!</string>
+    <string name="gender">Select Your Gender</string>
+    <string name="DOB">Select Your Date Of Birth</string>
     <string name="loan_amount">Loan Amount</string>
+    <string name="back">Take Me Back</string>
+    <string name="next">Next</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="other">Other</string>
 </resources>

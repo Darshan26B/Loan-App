@@ -1,20 +1,18 @@
 package com.example.myloan_app
 
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.View
-import android.widget.Button
-import android.widget.TextView
+ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.core.widget.addTextChangedListener
+import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.google.android.material.textview.MaterialTextView
@@ -41,10 +39,11 @@ class DetailActivity : AppCompatActivity() {
     private lateinit var txtInputNumber: TextInputLayout
     private lateinit var txtInputPinCode: TextInputLayout
     private lateinit var userSendOtp: TextView
-    private lateinit var userVerifyOtp: Button
+    private lateinit var userVerifyOtp: MaterialButton
     private lateinit var verificationId: String
+    private lateinit var sharePref: SharedPref
     private lateinit var database: DatabaseReference
-    lateinit var auth: FirebaseAuth
+    private lateinit var auth: FirebaseAuth
 
     private lateinit var userOTP: OTPTextView
 
@@ -71,6 +70,7 @@ class DetailActivity : AppCompatActivity() {
 
         auth = FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance().getReference("Users")
+        sharePref = SharedPref(this)
 
         txtInputPinCode.endIconMode = TextInputLayout.END_ICON_NONE
         txtInputNumber.endIconMode = TextInputLayout.END_ICON_NONE
@@ -78,41 +78,57 @@ class DetailActivity : AppCompatActivity() {
         userIconSet(userPinCode, txtInputPinCode, 6)
         userIconSet(userNumber, txtInputNumber, 10)
 
+        userSendOtp.visibility = View.VISIBLE
         userOTP.visibility = View.GONE
 
-        val shareValue = getSharedPreferences("MYData", MODE_PRIVATE)
+       /* val user = auth.currentUser
+        if (user != null) {
+//            userSendOtp.visibility = View.GONE
+//            userOTP.visibility = View.GONE
+            userVerifyOtp.setText("Next")
+            val intent = Intent(this, LoanAmountActivity::class.java)
+            startActivity(intent)
+        }*/
 
-        val name = shareValue.getString("Name", "")
-        val lastName = shareValue.getString("LastName", "")
-        val email = shareValue.getString("Email", "")
+        val name = sharePref.getData("Name")
+        val lastName = sharePref.getData("LastName")
+        val email = sharePref.getData("Email")
 
         userName.text = name
         userLastName.text = lastName
         userEmailId.text = email
 
+
         userSendOtp.setOnClickListener {
             val phoneNumber = "+91" + userNumber.text.toString()
 
-            when{
+            when {
                 phoneNumber.length != 13 -> {
                     userNumber.error = "Enter 10 digit  phone number"
                 }
+
                 userPinCode.text.toString().isEmpty() -> {
                     userPinCode.error = "Enter a valid pin-code"
                 }
+
                 userPinCode.length() != 6 -> {
                     userPinCode.error = "Enter a valid pin-code"
                 }
-               else ->{
-                   userOTP.visibility = View.VISIBLE
-                   phoneAuth(phoneNumber)
-               }
+
+                else -> {
+                    userOTP.visibility = View.VISIBLE
+                    phoneAuth(phoneNumber)
+                }
             }
 
         }
     }
 
-    private fun userIconSet(user:TextInputEditText, txtInput: TextInputLayout,numberLength: Number) {
+    private fun userIconSet(
+        user: TextInputEditText,
+        txtInput: TextInputLayout,
+        numberLength: Number,
+    ) {
         user.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
 
@@ -127,18 +143,27 @@ class DetailActivity : AppCompatActivity() {
             }
 
             override fun afterTextChanged(s: Editable?) {
-
             }
-
         })
+    }
 
+    override fun onResume() {
+        super.onResume()
+
+        // Retrieve data
+        val savedNumber = sharePref.getData("UserNumber")
+        val savedPinCode = sharePref.getData("UserPinCode")
+
+        // Update UI with saved data
+        userNumber.setText(savedNumber)
+        userPinCode.setText(savedPinCode)
     }
 
     private fun phoneAuth(number: String) {
         val options = PhoneAuthOptions.newBuilder(auth)
-            .setPhoneNumber(number) // Phone number to verify
-            .setTimeout(60L, TimeUnit.SECONDS) // Timeout and unit
-            .setActivity(this) // Activity (for callback binding)
+            .setPhoneNumber(number)
+            .setTimeout(60L, TimeUnit.SECONDS)
+            .setActivity(this)
             .setCallbacks(object : OnVerificationStateChangedCallbacks() {
                 override fun onVerificationCompleted(p0: PhoneAuthCredential) {
                 }
@@ -184,13 +209,21 @@ class DetailActivity : AppCompatActivity() {
 
         userVerifyOtp.setOnClickListener {
             val otp = userOTP.otpEditText!!.text.toString()
-            val user = user(userName.text.toString(), userLastName.text.toString(), userEmailId.text.toString(), userNumber.text.toString(), userPinCode.text.toString())
+            val user = user(
+                userName.text.toString(),
+                userLastName.text.toString(),
+                userEmailId.text.toString(),
+                userNumber.text.toString(),
+                userPinCode.text.toString())
+
+            sharePref.saveData("UserNumber",userNumber.text.toString())
+            sharePref.saveData("UserPinCode",userPinCode.text.toString())
 
             database.child(userNumber.text.toString()).setValue(user).addOnSuccessListener {
-                val intent = Intent(this, MainActivity::class.java)
+                val intent = Intent(this, LoanAmountActivity::class.java)
+                intent.putExtra("userNumber", userNumber.text.toString())
                 startActivity(intent)
             }
-
             if (otp.isNotEmpty()) {
                 val credential = PhoneAuthProvider.getCredential(verificationId, otp)
                 signInWithPhoneAuthCredential(credential)
@@ -203,9 +236,10 @@ class DetailActivity : AppCompatActivity() {
         auth.signInWithCredential(credential)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    val intent =Intent(this,LoanAmountActivity::class.java)
-                    startActivity(intent)
                     Toast.makeText(this, "OTP Verified", Toast.LENGTH_SHORT).show()
+                    userSendOtp.visibility = View.GONE
+                    userOTP.visibility = View.GONE
+                    userVerifyOtp.setText("Next")
                 } else {
                     Toast.makeText(this, "${task.exception}", Toast.LENGTH_SHORT).show()
                 }
