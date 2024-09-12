@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
@@ -7,4 +7,211 @@
     android:layout_height="match_parent"
     tools:context=".ProfessionActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:id="@+id/txt_profession"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/relativeLayoutSalary"
+        android:layout_marginHorizontal="@dimen/_15sdp"
+        android:layout_marginBottom="@dimen/_20sdp"
+        android:text="@string/profession"
+        android:textAlignment="center"
+        android:textColor="@color/blue"
+        android:textSize="@dimen/_20sdp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:layout_width="@dimen/_40sdp"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_above="@+id/relativeLayoutSalary"
+        android:layout_alignEnd="@+id/txt_profession"
+        android:padding="@dimen/_5sdp" />
+
+    <RelativeLayout
+        android:id="@+id/relativeLayoutSalary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/relativeLayoutEmployed"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        android:background="@drawable/bg_item"
+        android:padding="@dimen/_5sdp">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/p_salaried"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="5"
+            android:padding="@dimen/_5sdp"
+            android:text="@string/salaried"
+            android:textColor="@color/darkBlue"
+            android:textSize="@dimen/_15sdp" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/p_sub_salaried"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/p_salaried"
+            android:ems="5"
+            android:text="@string/sub_salaried"
+            android:textColor="@color/darkBlue"
+            android:textSize="@dimen/_15sdp" />
+
+
+        <ImageView
+            android:id="@+id/P_RightSalaried"
+            android:layout_width="@dimen/_10sdp"
+            android:layout_height="@dimen/_10sdp"
+            android:layout_alignTop="@+id/p_salaried"
+            android:layout_alignEnd="@+id/p_salaried"
+            android:src="@drawable/right" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relativeLayoutEmployed"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/relativeLayoutSelfEmploy"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:background="@drawable/bg_item"
+        android:padding="@dimen/_5sdp">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/p_employed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="5"
+            android:padding="@dimen/_5sdp"
+            android:text="@string/employed"
+            android:textColor="@color/darkBlue"
+            android:textSize="@dimen/_15sdp" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/p_sub_employed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/p_employed"
+            android:ems="5"
+            android:text="@string/sub_salaried"
+            android:textColor="@color/darkBlue"
+            android:textSize="@dimen/_15sdp" />
+
+        <ImageView
+            android:id="@+id/p_RightEmploy"
+            android:layout_width="@dimen/_10sdp"
+            android:layout_height="@dimen/_10sdp"
+            android:layout_alignTop="@+id/p_employed"
+            android:layout_alignEnd="@+id/p_employed"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:src="@drawable/right" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relativeLayoutSelfEmploy"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/relativeLayoutStudent"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:background="@drawable/bg_item"
+        android:padding="@dimen/_5sdp">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/p_SelfEmploy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="5"
+            android:padding="@dimen/_5sdp"
+            android:text="@string/selfEmployed"
+            android:textColor="@color/darkBlue"
+            android:textSize="@dimen/_15sdp" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/p_sub_selfEmployed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/p_SelfEmploy"
+            android:ems="5"
+            android:text="@string/sub_selfEmployed"
+            android:textColor="@color/darkBlue"
+            android:textSize="@dimen/_15sdp" />
+
+        <ImageView
+            android:id="@+id/p_RightSelfEmploy"
+            android:layout_width="@dimen/_10sdp"
+            android:layout_height="@dimen/_10sdp"
+            android:layout_alignTop="@+id/p_SelfEmploy"
+            android:layout_alignEnd="@+id/p_SelfEmploy"
+            android:src="@drawable/right" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relativeLayoutStudent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btn_nextP"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:background="@drawable/bg_item"
+        android:padding="@dimen/_5sdp">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/p_Student"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="5"
+            android:padding="@dimen/_5sdp"
+            android:text="@string/student"
+            android:textColor="@color/darkBlue"
+            android:textSize="@dimen/_15sdp" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/p_sub_student"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/p_Student"
+            android:ems="5"
+            android:text="@string/sub_student"
+            android:textColor="@color/darkBlue"
+            android:textSize="@dimen/_15sdp" />
+
+        <ImageView
+            android:id="@+id/p_RightStudent"
+            android:layout_width="@dimen/_10sdp"
+            android:layout_height="@dimen/_10sdp"
+            android:layout_alignTop="@+id/p_Student"
+            android:layout_alignEnd="@+id/p_Student"
+            android:src="@drawable/right" />
+
+    </RelativeLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_nextP"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btn_backP"
+        android:layout_marginHorizontal="@dimen/_18sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:backgroundTint="@color/blue"
+        android:paddingVertical="@dimen/_10sdp"
+        android:text="@string/next"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_15sdp"
+        app:cornerRadius="@dimen/_10sdp" />
+
+    <TextView
+        android:id="@+id/btn_backP"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="@dimen/_40sdp"
+        android:text="@string/back"
+        android:textSize="@dimen/_15sdp" />
+
+
+</RelativeLayout>

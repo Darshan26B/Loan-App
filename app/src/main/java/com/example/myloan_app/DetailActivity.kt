@@ -124,10 +124,7 @@ class DetailActivity : AppCompatActivity() {
         }
     }
 
-    private fun userIconSet(
-        user: TextInputEditText,
-        txtInput: TextInputLayout,
-        numberLength: Number,
+    private fun userIconSet(user: TextInputEditText, txtInput: TextInputLayout, numberLength: Number,
     ) {
         user.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {

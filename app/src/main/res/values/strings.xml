@@ -1,23 +1,37 @@
 <resources>
     <string name="app_name">MY Loan-App</string>
+    ------ ************* (MAIN / DETAILS)ACTIVITY ************* ------
     <string name="welcome">Welcome\n My Loan-App</string>
-    <string name="UserName">Name</string>
-    <string name="UserLastName">Last Name</string>
-    <string name="UserEmailID">E-mail ID</string>
-    <string name="UserPhoneNumber">Number</string>
-    <string name="UserPinCode">Pin Code</string>
     <string name="send_otp">Send OTP</string>
     <string name="verify_otp">Verify OTP</string>
     <string name="policy">By creating an account you agree to our Terms of Service and Privacy Policy.</string>
     <string name="google_sign">Sign in With Google</string>/>
     <string name="default_web_client_id" translatable="false">692630145160-5ub4m22g5te3s6vrd11t4314d8vpj1pv.apps.googleusercontent.com</string>
+    <string name="UserName">Name</string>
+    <string name="UserLastName">Last Name</string>
+    <string name="UserPhoneNumber">Number</string>
+    <string name="UserEmailID">E-mail ID</string>
+    <string name="UserPinCode">Pin Code</string>
+    ------ ************* LOAN AMOUNT ACTIVITY ************* ------
     <string name="Loan">Enter Your Required Loan Amount!</string>
-    <string name="gender">Select Your Gender</string>
-    <string name="DOB">Select Your Date Of Birth</string>
     <string name="loan_amount">Loan Amount</string>
+    ------ ************* DOB ACTIVITY ************* ------
+    <string name="DOB">Select Your Date Of Birth</string>
     <string name="back">Take Me Back</string>
     <string name="next">Next</string>
+    ------ ************* GENDER ACTIVITY ************* ------
+    <string name="gender">Select Your Gender</string>
     <string name="male">Male</string>
     <string name="female">Female</string>
     <string name="other">Other</string>
+    ------ ************* PROFESSION ACTIVITY ************* ------
+    <string name="profession">Select Your Profession</string>
+    <string name="salaried"><b>* Salaried</b></string>
+    <string name="sub_salaried">- Receiving monthly income from a job</string>
+    <string name="employed"><b>* Self-Employed Business or MSME </b></string>
+    <string name="sub_employed">- Business with a valid GST certificate</string>
+    <string name="selfEmployed"><b>* Self-Employed Professional</b></string>
+    <string name="sub_selfEmployed">- Eg. Consultant street vendor,freelancer \tagent practitioner,etc.</string>
+    <string name="student"><b>* Student</b></string>
+    <string name="sub_student">- Student from an accredited university \t \tor college.</string>
 </resources>

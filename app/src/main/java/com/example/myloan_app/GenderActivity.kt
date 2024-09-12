@@ -91,7 +91,7 @@ class GenderActivity : AppCompatActivity() {
         resetButtonStyles(male, feMale, other)
         when (gender) {
             "Male" -> {
-                male.setBackgroundResource(R.drawable.gender_bg)
+                male.setBackgroundResource(R.drawable.bg_all_details)
                 male.setTextColor(getColor(R.color.black))
                 rightMale.visibility = View.VISIBLE
                 rightFeMale.visibility = View.INVISIBLE
@@ -99,7 +99,7 @@ class GenderActivity : AppCompatActivity() {
             }
 
             "Female" -> {
-                feMale.setBackgroundResource(R.drawable.gender_bg)
+                feMale.setBackgroundResource(R.drawable.bg_all_details)
                 feMale.setTextColor(getColor(R.color.black))
                 rightFeMale.visibility = View.VISIBLE
                 rightMale.visibility = View.INVISIBLE
@@ -108,7 +108,7 @@ class GenderActivity : AppCompatActivity() {
             }
 
             "Other" -> {
-                other.setBackgroundResource(R.drawable.gender_bg)
+                other.setBackgroundResource(R.drawable.bg_all_details)
                 other.setTextColor(getColor(R.color.black))
                 rightOther.visibility = View.VISIBLE
                 rightFeMale.visibility = View.INVISIBLE

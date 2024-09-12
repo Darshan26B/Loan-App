@@ -95,7 +95,6 @@ class DOBActivity : AppCompatActivity() {
         }
         return selectedDate.before(eighteenYearsAgo) && !selectedDate.after(today)
     }
-
     private fun saveDate(number: String) {
         val day = dobPicker.dayOfMonth
         val month = dobPicker.month + 1
