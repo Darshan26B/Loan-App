@@ -13,6 +13,9 @@
         android:theme="@style/Theme.MYLoanApp"
         tools:targetApi="31">
         <activity
+            android:name=".PanCardActivity"
+            android:exported="false" />
+        <activity
             android:name=".IncomeActivity"
             android:exported="false" />
         <activity

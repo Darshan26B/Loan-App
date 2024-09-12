@@ -34,4 +34,15 @@
     <string name="sub_selfEmployed">- Eg. Consultant street vendor,freelancer \tagent practitioner,etc.</string>
     <string name="student"><b>* Student</b></string>
     <string name="sub_student">- Student from an accredited university \t \tor college.</string>
+    ------ ************* INCOME ACTIVITY ************* ------
+    <string name="IncomeNO"><b>No Monthly Income</b></string>
+    <string name="IncomeLess"><b>Income Less Than 10000</b></string>
+    <string name="IncomeMiddle"><b>10000–15000</b></string>
+    <string name="IncomeAbove"><b>15000 &amp;Above</b></string>
+    ------ ************* PanCard ACTIVITY ************* ------
+    <string name="PanCard"><b>you are at a final step your loan application</b></string>
+    <string name="panCard_Number">PAN CARD Number</string>
+    <string name="btnSubmit">Submit &amp;Generate Offer</string>
+    <string name="btnSkip">Skip</string>
+
 </resources>

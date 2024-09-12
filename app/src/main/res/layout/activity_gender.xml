@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/gender_male"
         android:layout_marginHorizontal="@dimen/_15sdp"
-        android:layout_marginBottom="@dimen/_25sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
         android:text="@string/gender"
         android:textAlignment="center"
         android:textColor="@color/blue"
@@ -49,6 +49,7 @@
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/gender_male"
         android:layout_alignEnd="@+id/gender_male"
+        android:layout_margin="@dimen/_2sdp"
         android:src="@drawable/right" />
 
     <com.google.android.material.textview.MaterialTextView
@@ -72,6 +73,7 @@
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/gender_feMale"
         android:layout_alignEnd="@+id/gender_feMale"
+        android:layout_margin="@dimen/_2sdp"
         android:src="@drawable/right" />
 
     <com.google.android.material.textview.MaterialTextView
@@ -96,12 +98,14 @@
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/gender_other"
         android:layout_alignEnd="@+id/gender_other"
+        android:layout_margin="@dimen/_2sdp"
         android:src="@drawable/right" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_nextGender"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+
         android:layout_above="@+id/btn_backGender"
         android:layout_marginHorizontal="@dimen/_18sdp"
         android:layout_marginTop="@dimen/_20sdp"

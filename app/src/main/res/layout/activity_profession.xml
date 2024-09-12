@@ -17,6 +17,7 @@
         android:text="@string/profession"
         android:textAlignment="center"
         android:textColor="@color/blue"
+        android:paddingEnd="@dimen/_15sdp"
         android:textSize="@dimen/_20sdp"
         android:textStyle="bold" />
 
@@ -24,7 +25,9 @@
         android:layout_width="@dimen/_40sdp"
         android:layout_height="@dimen/_40sdp"
         android:layout_above="@+id/relativeLayoutSalary"
+        android:layout_marginBottom="@dimen/_10sdp"
         android:layout_alignEnd="@+id/txt_profession"
+        android:src="@drawable/profession"
         android:padding="@dimen/_5sdp" />
 
     <RelativeLayout

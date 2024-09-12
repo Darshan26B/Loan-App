@@ -5,104 +5,135 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".IncomeActivity">
+    tools:context=".IncomeActivity"><?xml version="1.0" encoding="utf-8"?>
 
     <TextView
-        android:id="@+id/txt_gender"
+        android:id="@+id/txt_profession"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/gender_male"
         android:layout_marginHorizontal="@dimen/_15sdp"
-        android:layout_marginBottom="@dimen/_25sdp"
-        android:text="@string/gender"
+        android:layout_above="@+id/income_No"
+        android:layout_marginBottom="@dimen/_30sdp"
         android:textAlignment="center"
-        android:textColor="@color/blue"
+        android:paddingEnd="@dimen/_15sdp"
+        android:text="@string/profession"
+         android:textColor="@color/blue"
         android:textSize="@dimen/_20sdp"
         android:textStyle="bold" />
 
     <ImageView
         android:layout_width="@dimen/_40sdp"
         android:layout_height="@dimen/_40sdp"
-        android:layout_above="@+id/gender_male"
-        android:layout_alignEnd="@+id/txt_gender"
-        android:padding="@dimen/_5sdp"
-        android:src="@drawable/gender" />
+        android:layout_above="@+id/income_No"
+        android:layout_marginBottom="@dimen/_25sdp"
+        android:layout_alignEnd="@+id/txt_profession"
+        android:src="@drawable/wallet"
+        android:padding="@dimen/_5sdp" />
+
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/gender_male"
-        android:layout_width="wrap_content"
+        android:id="@+id/income_No"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/gender_feMale"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="@dimen/_20sdp"
         android:background="@drawable/bg_item"
         android:ems="5"
-        android:padding="@dimen/_5sdp"
-        android:text="@string/male"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textSize="@dimen/_20sdp" />
+        android:layout_above="@+id/Income_Less"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        android:padding="@dimen/_10sdp"
+        android:layout_marginBottom="20dp"
+        android:text="@string/IncomeNO"
+        android:textColor="@color/darkBlue"
+        android:textSize="@dimen/_15sdp" />
+
 
     <ImageView
-        android:id="@+id/right_male"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/gender_male"
-        android:layout_alignEnd="@+id/gender_male"
+        android:id="@+id/IRightNo"
+        android:layout_width="@dimen/_10sdp"
+        android:layout_height="@dimen/_10sdp"
+        android:layout_alignTop="@+id/income_No"
+        android:layout_alignEnd="@+id/income_No"
+        android:layout_margin="@dimen/_2sdp"
         android:src="@drawable/right" />
 
+
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/gender_feMale"
-        android:layout_width="wrap_content"
+        android:id="@+id/Income_Less"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/gender_other"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="@dimen/_20sdp"
         android:background="@drawable/bg_item"
         android:ems="5"
-        android:padding="@dimen/_5sdp"
-        android:text="@string/female"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textSize="@dimen/_20sdp" />
+        android:layout_above="@+id/Income_middle"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        android:padding="@dimen/_10sdp"
+        android:layout_marginBottom="20dp"
+        android:text="@string/IncomeLess"
+        android:textColor="@color/darkBlue"
+        android:textSize="@dimen/_15sdp" />
+
 
     <ImageView
-        android:id="@+id/right_feMale"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/gender_feMale"
-        android:layout_alignEnd="@+id/gender_feMale"
+        android:id="@+id/I_RightLess"
+        android:layout_width="@dimen/_10sdp"
+        android:layout_height="@dimen/_10sdp"
+        android:layout_alignTop="@+id/Income_Less"
+        android:layout_alignEnd="@+id/Income_Less"
+        android:layout_margin="@dimen/_2sdp"
         android:src="@drawable/right" />
 
+
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/gender_other"
-        android:layout_width="wrap_content"
+        android:id="@+id/Income_middle"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/btn_nextGender"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="@dimen/_20sdp"
-        android:layout_marginBottom="@dimen/_50sdp"
         android:background="@drawable/bg_item"
         android:ems="5"
-        android:padding="@dimen/_5sdp"
-        android:text="@string/other"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textSize="@dimen/_20sdp" />
+        android:layout_above="@+id/Income_above"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        android:padding="@dimen/_10sdp"
+        android:layout_marginBottom="20dp"
+        android:text="@string/IncomeMiddle"
+        android:textColor="@color/darkBlue"
+        android:textSize="@dimen/_15sdp" />
+
 
     <ImageView
-        android:id="@+id/right_other"
-        android:layout_width="wrap_content"
+        android:id="@+id/I_RightMiddle"
+        android:layout_width="@dimen/_10sdp"
+        android:layout_height="@dimen/_10sdp"
+        android:layout_alignTop="@+id/Income_middle"
+        android:layout_alignEnd="@+id/Income_middle"
+        android:layout_margin="@dimen/_2sdp"
+        android:src="@drawable/right" />
+
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/Income_above"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/gender_other"
-        android:layout_alignEnd="@+id/gender_other"
+        android:background="@drawable/bg_item"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        android:layout_above="@+id/btn_nextIncome"
+        android:layout_marginBottom="@dimen/_20sdp"
+        android:ems="5"
+        android:padding="@dimen/_10sdp"
+        android:text="@string/IncomeAbove"
+        android:textColor="@color/darkBlue"
+        android:textSize="@dimen/_15sdp" />
+
+    <ImageView
+        android:id="@+id/I_RightAbove"
+        android:layout_width="@dimen/_10sdp"
+        android:layout_height="@dimen/_10sdp"
+        android:layout_alignTop="@+id/Income_above"
+        android:layout_alignEnd="@+id/Income_above"
+        android:layout_margin="@dimen/_2sdp"
         android:src="@drawable/right" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_nextGender"
+        android:id="@+id/btn_nextIncome"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/btn_backGender"
+        android:layout_above="@+id/btn_backIncome"
         android:layout_marginHorizontal="@dimen/_18sdp"
         android:layout_marginTop="@dimen/_20sdp"
         android:layout_marginBottom="@dimen/_10sdp"
@@ -114,16 +145,14 @@
         app:cornerRadius="@dimen/_10sdp" />
 
     <TextView
-        android:id="@+id/btn_backGender"
+        android:id="@+id/btn_backIncome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerInParent="true"
-        android:layout_marginBottom="@dimen/_80sdp"
+        android:layout_marginBottom="@dimen/_60sdp"
         android:text="@string/back"
         android:textSize="@dimen/_15sdp" />
-
-
 
 
 </RelativeLayout>

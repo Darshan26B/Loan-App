@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PanCardActivity">
+
+
+    <TextView
+        android:id="@+id/txt_panCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/txtInputPanCard"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:text="@string/PanCard"
+        android:textColor="@color/blue"
+        android:textSize="@dimen/_20sdp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:layout_width="@dimen/_40sdp"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_above="@+id/txtInputPanCard"
+        android:layout_alignEnd="@+id/txtInputPanCard"
+        android:layout_marginBottom="@dimen/_20sdp"
+        android:padding="@dimen/_5sdp"
+        android:src="@drawable/pancard" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/txtInputPanCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btn_next"
+        android:layout_marginHorizontal="@dimen/_18sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_marginBottom="@dimen/_100sdp"
+        android:hint="@string/panCard_Number"
+        android:textColorHint="@color/strokeColor"
+        app:endIconDrawable="@drawable/right"
+        app:endIconMode="custom"
+        app:endIconTint="@null">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/txt_panCardNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_item"
+            android:inputType="number" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_next"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btn_back"
+        android:layout_marginHorizontal="@dimen/_18sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:backgroundTint="@color/blue"
+        android:paddingVertical="@dimen/_10sdp"
+        android:text="@string/btnSubmit"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_15sdp"
+        app:cornerRadius="@dimen/_10sdp" />
+
+    <TextView
+        android:id="@+id/btn_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="@dimen/_80sdp"
+        android:text="@string/btnSkip"
+        android:textSize="@dimen/_15sdp" />
+</RelativeLayout>

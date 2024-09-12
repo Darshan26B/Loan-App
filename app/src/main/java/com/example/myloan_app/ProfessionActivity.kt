@@ -20,7 +20,11 @@ class ProfessionActivity : AppCompatActivity() {
     private lateinit var salary: MaterialTextView
     private lateinit var employed: MaterialTextView
     private lateinit var selfEmploy: MaterialTextView
+    private lateinit var subSalary: MaterialTextView
+    private lateinit var subEmployed: MaterialTextView
+    private lateinit var subSelfEmploy: MaterialTextView
     private lateinit var student: MaterialTextView
+    private lateinit var subStudent: MaterialTextView
     private lateinit var rSalary: RelativeLayout
     private lateinit var rEmployed: RelativeLayout
     private lateinit var rSelfEmploy: RelativeLayout
@@ -33,7 +37,7 @@ class ProfessionActivity : AppCompatActivity() {
     private lateinit var btnBack: MaterialTextView
     private lateinit var database: DatabaseReference
     private lateinit var sharePref: SharedPref
-    var selectedProfession: String? = null
+    private var selectedProfession: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,6 +52,10 @@ class ProfessionActivity : AppCompatActivity() {
         employed = findViewById(R.id.p_employed)
         selfEmploy = findViewById(R.id.p_SelfEmploy)
         student = findViewById(R.id.p_Student)
+        subSalary = findViewById(R.id.p_sub_salaried)
+        subEmployed = findViewById(R.id.p_sub_employed)
+        subSelfEmploy = findViewById(R.id.p_sub_selfEmployed)
+        subStudent = findViewById(R.id.p_sub_student)
         rSalary = findViewById(R.id.relativeLayoutSalary)
         rEmployed = findViewById(R.id.relativeLayoutEmployed)
         rSelfEmploy = findViewById(R.id.relativeLayoutSelfEmploy)
@@ -71,7 +79,7 @@ class ProfessionActivity : AppCompatActivity() {
 
         rSalary.setOnClickListener {
             selectProfession("salary")
-        }
+         }
         rEmployed.setOnClickListener {
             selectProfession("employed")
         }
@@ -87,8 +95,7 @@ class ProfessionActivity : AppCompatActivity() {
         btnNext.setOnClickListener {
 
             if (selectedProfession != null) {
-                database.child(userNumber.toString()).child("profession")
-                    .setValue(selectedProfession)
+                database.child(userNumber.toString()).child("profession").setValue(selectedProfession)
                     .addOnSuccessListener {
                         val intent = Intent(this, IncomeActivity::class.java)
                         intent.putExtra("userNumber", userNumber)
@@ -101,17 +108,16 @@ class ProfessionActivity : AppCompatActivity() {
         btnBack.setOnClickListener {
             finish()
         }
-
     }
-
     private fun selectProfession(profession: String) {
         selectedProfession = profession
         sharePref.saveData("profession", profession)
-        resetButtonStyles(salary, employed, selfEmploy, student)
+        resetButtonStyles(salary,subSalary,employed,subEmployed,selfEmploy,subSelfEmploy,student,subStudent)
         when (profession) {
             "salary" -> {
-                salary.setBackgroundResource(R.drawable.bg_all_details)
+                rSalary.setBackgroundResource(R.drawable.bg_all_details)
                 salary.setTextColor(getColor(R.color.black))
+                subSalary.setTextColor(getColor(R.color.black))
                 rightSalary.visibility = View.VISIBLE
                 rightEmployed.visibility = View.INVISIBLE
                 rightSelfEmploy.visibility = View.INVISIBLE
@@ -119,8 +125,9 @@ class ProfessionActivity : AppCompatActivity() {
             }
 
             "employed" -> {
-                employed.setBackgroundResource(R.drawable.bg_all_details)
+                rEmployed.setBackgroundResource(R.drawable.bg_all_details)
                 employed.setTextColor(getColor(R.color.black))
+                subEmployed.setTextColor(getColor(R.color.black))
                 rightEmployed.visibility = View.VISIBLE
                 rightSalary.visibility = View.INVISIBLE
                 rightSelfEmploy.visibility = View.INVISIBLE
@@ -129,17 +136,18 @@ class ProfessionActivity : AppCompatActivity() {
             }
 
             "selfEmploy" -> {
-                selfEmploy.setBackgroundResource(R.drawable.bg_all_details)
+                rSelfEmploy.setBackgroundResource(R.drawable.bg_all_details)
                 selfEmploy.setTextColor(getColor(R.color.black))
+                subSelfEmploy.setTextColor(getColor(R.color.black))
                 rightSelfEmploy.visibility = View.VISIBLE
                 rightSalary.visibility = View.INVISIBLE
                 rightEmployed.visibility = View.INVISIBLE
                 rightStudent.visibility = View.INVISIBLE
             }
-
             "student" -> {
-                student.setBackgroundResource(R.drawable.bg_all_details)
+                rStudent.setBackgroundResource(R.drawable.bg_all_details)
                 student.setTextColor(getColor(R.color.black))
+                subStudent.setTextColor(getColor(R.color.black))
                 rightStudent.visibility = View.VISIBLE
                 rightSalary.visibility = View.INVISIBLE
                 rightEmployed.visibility = View.INVISIBLE
@@ -155,17 +163,18 @@ class ProfessionActivity : AppCompatActivity() {
         }
     }
 
-    private fun updateSelectedGenderUI(savedGender: String?) {
+    private fun updateSelectedProfessionUI(savedGender: String?) {
         when (savedGender) {
-            "Male" -> selectProfession("Male")
-            "Female" -> selectProfession("Female")
-            "Other" -> selectProfession("Other")
+            "salary" -> selectProfession("salary")
+            "employed" -> selectProfession("employed")
+            "selfEmploy" -> selectProfession("selfEmploy")
+            "student" -> selectProfession("student")
         }
     }
 
     override fun onResume() {
         super.onResume()
-        selectedProfession = sharePref.getData("gender")
-        updateSelectedGenderUI(selectedProfession)
+        selectedProfession = sharePref.getData("profession")
+        updateSelectedProfessionUI(selectedProfession)
     }
 }

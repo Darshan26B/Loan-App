@@ -12,56 +12,48 @@ import androidx.core.view.WindowInsetsCompat
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 
-class LoanAmountActivity : AppCompatActivity() {
+class PanCardActivity : AppCompatActivity() {
 
-    private lateinit var loanAmount: TextInputEditText
-    private lateinit var loan: TextInputLayout
+    private lateinit var panCardAmount: TextInputEditText
+    private lateinit var panCard: TextInputLayout
     private lateinit var nextButton: MaterialButton
     private lateinit var backButton: TextView
     private lateinit var database: DatabaseReference
     private lateinit var sharePref: SharedPref
-    lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_loan_amount)
+        setContentView(R.layout.activity_pan_card)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
 
-        loanAmount = findViewById(R.id.txt_loanAmount)
-        loan = findViewById(R.id.txtInputLoan)
+        panCardAmount = findViewById(R.id.txt_panCardNumber)
+        panCard = findViewById(R.id.txtInputPanCard)
         nextButton = findViewById(R.id.btn_next)
         backButton = findViewById(R.id.btn_back)
 
         database = FirebaseDatabase.getInstance().getReference("Users")
         sharePref = SharedPref(this)
-        auth = FirebaseAuth.getInstance()
-
-      /*  val user = auth.currentUser
-        if (user != null) {
-            val intent = Intent(this, DOBActivity::class.java)
-            startActivity(intent)
-        }*/
-
         val userNumber = intent.getStringExtra("userNumber") ?: sharePref.getData("userNumber")
 
-        loanAmount.addTextChangedListener(object : TextWatcher {
+        panCardAmount.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
 
             }
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                if (loanAmount.length() == 0) {
-                    loan.endIconMode = TextInputLayout.END_ICON_NONE
+                val pan = panCardAmount.text.toString().trim()
+                if (pan.length == 10 && validatePAN(pan)) {
+                    panCard.endIconMode = TextInputLayout.END_ICON_CUSTOM
                 } else {
-                    loan.endIconMode = TextInputLayout.END_ICON_CUSTOM
+                    panCardAmount.error = "Enter a valid pan-card Number"
+                    panCard.endIconMode = TextInputLayout.END_ICON_NONE
                 }
             }
             override fun afterTextChanged(s: Editable?) {
@@ -72,13 +64,13 @@ class LoanAmountActivity : AppCompatActivity() {
             sharePref.saveData("userNumber", userNumber)
         }
         nextButton.setOnClickListener {
-            val amount = loanAmount.text.toString()
-            sharePref.saveData("loanAmount", amount)
+            val number = panCardAmount.text.toString()
+            sharePref.saveData("panCardNum", number)
 
-            if (amount.isEmpty()) {
-                loanAmount.error = "Enter a valid loan amount"
+            if (number.isEmpty()) {
+                panCardAmount.error = "Enter a pan-card Number"
             } else {
-                database.child(userNumber.toString()).child("loanAmount").setValue(amount)
+                database.child(userNumber.toString()).child("panCardNum").setValue(number)
                     .addOnSuccessListener {
                         val intent = Intent(this, DOBActivity::class.java)
                         intent.putExtra("userNumber", userNumber)
@@ -91,9 +83,9 @@ class LoanAmountActivity : AppCompatActivity() {
             finish()
         }
     }
-    override fun onResume() {
-        super.onResume()
-        val savedNumber = sharePref.getData("loanAmount")
-        loanAmount.setText(savedNumber)
+    private fun validatePAN(pan: String): Boolean {
+        // PAN regex pattern
+        val panPattern = "[A-Z]{5}[0-9]{4}[A-Z]{1}"
+        return pan.matches(Regex(panPattern))
     }
 }
