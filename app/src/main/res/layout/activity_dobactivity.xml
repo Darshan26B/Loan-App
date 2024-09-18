@@ -7,14 +7,21 @@
     android:layout_height="match_parent"
     tools:context=".DOBActivity">
 
-    <TextView
-        android:id="@+id/txt_DOB"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/DOB_Picker"
-        android:layout_marginHorizontal="@dimen/_15sdp"
+        android:layout_marginBottom="@dimen/_20sdp"
+        android:layout_marginHorizontal="@dimen/_10sdp"
+        android:gravity="center">
+
+    <TextView
+        android:id="@+id/txt_DOB"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginHorizontal="@dimen/_20sdp"
         android:text="@string/DOB"
-        android:layout_marginBottom="@dimen/_5sdp"
         android:textColor="@color/blue"
         android:textSize="@dimen/_20sdp"
         android:textStyle="bold" />
@@ -22,11 +29,10 @@
     <ImageView
         android:layout_width="@dimen/_40sdp"
         android:layout_height="@dimen/_40sdp"
-        android:layout_above="@+id/DOB_Picker"
-        android:layout_alignEnd="@+id/txt_DOB"
+        android:layout_marginEnd="@dimen/_20sdp"
         android:padding="@dimen/_5sdp"
-
         android:src="@drawable/birthday" />
+    </LinearLayout>
 
     <DatePicker
         android:id="@+id/DOB_Picker"

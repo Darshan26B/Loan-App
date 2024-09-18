@@ -6,7 +6,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.View
- import android.widget.TextView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -31,9 +31,9 @@ import java.util.concurrent.TimeUnit
 
 class DetailActivity : AppCompatActivity() {
 
-    private lateinit var userName: MaterialTextView
-    private lateinit var userLastName: MaterialTextView
-    private lateinit var userEmailId: MaterialTextView
+    private lateinit var userName: TextInputEditText
+    private lateinit var userLastName: TextInputEditText
+    private lateinit var userEmailId: TextInputEditText
     private lateinit var userNumber: TextInputEditText
     private lateinit var userPinCode: TextInputEditText
     private lateinit var txtInputNumber: TextInputLayout
@@ -44,8 +44,8 @@ class DetailActivity : AppCompatActivity() {
     private lateinit var sharePref: SharedPref
     private lateinit var database: DatabaseReference
     private lateinit var auth: FirebaseAuth
-
     private lateinit var userOTP: OTPTextView
+    private var isClicked = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -81,23 +81,30 @@ class DetailActivity : AppCompatActivity() {
         userSendOtp.visibility = View.VISIBLE
         userOTP.visibility = View.GONE
 
-       /* val user = auth.currentUser
-        if (user != null) {
-//            userSendOtp.visibility = View.GONE
-//            userOTP.visibility = View.GONE
-            userVerifyOtp.setText("Next")
-            val intent = Intent(this, LoanAmountActivity::class.java)
-            startActivity(intent)
-        }*/
+//        val user = auth.currentUser
+//        if (user != null) {
+////            userSendOtp.visibility = View.GONE
+////            userOTP.visibility = View.GONE
+////            userVerifyOtp.setText("Next")
+//            val intent = Intent(this, LoanAmountActivity::class.java)
+//            startActivity(intent)
+//        }
 
         val name = sharePref.getData("Name")
         val lastName = sharePref.getData("LastName")
         val email = sharePref.getData("Email")
 
-        userName.text = name
-        userLastName.text = lastName
-        userEmailId.text = email
+        userName.setText(name)
+        userLastName.setText(lastName)
+        userEmailId.setText(email)
 
+        val savedNumber = sharePref.getData("UserNumber")
+        if (savedNumber.isNullOrEmpty()) {
+            userVerifyOtp.setOnClickListener {
+
+                startActivity(Intent(this, LoanAmountActivity::class.java))
+            }
+        }
 
         userSendOtp.setOnClickListener {
             val phoneNumber = "+91" + userNumber.text.toString()
@@ -120,11 +127,11 @@ class DetailActivity : AppCompatActivity() {
                     phoneAuth(phoneNumber)
                 }
             }
-
         }
     }
 
-    private fun userIconSet(user: TextInputEditText, txtInput: TextInputLayout, numberLength: Number,
+    private fun userIconSet(
+        user: TextInputEditText, txtInput: TextInputLayout, numberLength: Number,
     ) {
         user.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -155,7 +162,6 @@ class DetailActivity : AppCompatActivity() {
         userNumber.setText(savedNumber)
         userPinCode.setText(savedPinCode)
     }
-
     private fun phoneAuth(number: String) {
         val options = PhoneAuthOptions.newBuilder(auth)
             .setPhoneNumber(number)
@@ -163,6 +169,7 @@ class DetailActivity : AppCompatActivity() {
             .setActivity(this)
             .setCallbacks(object : OnVerificationStateChangedCallbacks() {
                 override fun onVerificationCompleted(p0: PhoneAuthCredential) {
+
                 }
 
                 override fun onVerificationFailed(e: FirebaseException) {
@@ -206,34 +213,40 @@ class DetailActivity : AppCompatActivity() {
 
         userVerifyOtp.setOnClickListener {
             val otp = userOTP.otpEditText!!.text.toString()
-            val user = user(
+            val user = User(
                 userName.text.toString(),
                 userLastName.text.toString(),
                 userEmailId.text.toString(),
                 userNumber.text.toString(),
-                userPinCode.text.toString())
+                userPinCode.text.toString()
+            )
 
-            sharePref.saveData("UserNumber",userNumber.text.toString())
-            sharePref.saveData("UserPinCode",userPinCode.text.toString())
+            sharePref.saveData("UserNumber", userNumber.text.toString())
+            sharePref.saveData("UserPinCode", userPinCode.text.toString())
 
-            database.child(userNumber.text.toString()).setValue(user).addOnSuccessListener {
-                val intent = Intent(this, LoanAmountActivity::class.java)
-                intent.putExtra("userNumber", userNumber.text.toString())
-                startActivity(intent)
-            }
             if (otp.isNotEmpty()) {
                 val credential = PhoneAuthProvider.getCredential(verificationId, otp)
                 signInWithPhoneAuthCredential(credential)
+
+                database.child(userNumber.text.toString()).setValue(user).addOnSuccessListener {
+                    val intent = Intent(this, LoanAmountActivity::class.java)
+                    intent.putExtra("userNumber", userNumber.text.toString())
+                    startActivity(intent)
+                }
             } else {
                 Toast.makeText(this, "Please enter OTP", Toast.LENGTH_SHORT).show()
             }
         }
     }
+
     private fun signInWithPhoneAuthCredential(credential: PhoneAuthCredential) {
         auth.signInWithCredential(credential)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    Toast.makeText(this, "OTP Verified", Toast.LENGTH_SHORT).show()
+                    if (!isClicked) {
+                        isClicked = true
+                        Toast.makeText(this, "OTP Verified", Toast.LENGTH_SHORT).show()
+                    }
                     userSendOtp.visibility = View.GONE
                     userOTP.visibility = View.GONE
                     userVerifyOtp.setText("Next")

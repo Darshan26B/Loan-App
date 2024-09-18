@@ -5,44 +5,48 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".IncomeActivity"><?xml version="1.0" encoding="utf-8"?>
+    tools:context=".IncomeActivity">
 
-    <TextView
-        android:id="@+id/txt_profession"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/_15sdp"
         android:layout_above="@+id/income_No"
-        android:layout_marginBottom="@dimen/_30sdp"
-        android:textAlignment="center"
-        android:paddingEnd="@dimen/_15sdp"
-        android:text="@string/profession"
-         android:textColor="@color/blue"
-        android:textSize="@dimen/_20sdp"
-        android:textStyle="bold" />
+        android:layout_marginBottom="@dimen/_20sdp"
+        android:layout_marginHorizontal="@dimen/_10sdp"
+        android:gravity="center">
 
-    <ImageView
-        android:layout_width="@dimen/_40sdp"
-        android:layout_height="@dimen/_40sdp"
-        android:layout_above="@+id/income_No"
-        android:layout_marginBottom="@dimen/_25sdp"
-        android:layout_alignEnd="@+id/txt_profession"
-        android:src="@drawable/wallet"
-        android:padding="@dimen/_5sdp" />
+        <TextView
+            android:id="@+id/txt_profession"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_15sdp"
+            android:layout_weight="1"
+            android:text="@string/income"
+            android:textColor="@color/blue"
+            android:textSize="@dimen/_20sdp"
+            android:textStyle="bold" />
 
+        <ImageView
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginEnd="@dimen/_20sdp"
+            android:padding="@dimen/_5sdp"
+            android:src="@drawable/wallet" />
+
+    </LinearLayout>
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/income_No"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg_item"
-        android:ems="5"
         android:layout_above="@+id/Income_Less"
         android:layout_marginHorizontal="@dimen/_20sdp"
-        android:padding="@dimen/_10sdp"
         android:layout_marginBottom="20dp"
+        android:background="@drawable/bg_item"
+        android:ems="5"
+        android:padding="@dimen/_10sdp"
         android:text="@string/IncomeNO"
-        android:textColor="@color/darkBlue"
+        android:textColor="@color/blue"
         android:textSize="@dimen/_15sdp" />
 
 
@@ -60,14 +64,14 @@
         android:id="@+id/Income_Less"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg_item"
-        android:ems="5"
         android:layout_above="@+id/Income_middle"
         android:layout_marginHorizontal="@dimen/_20sdp"
-        android:padding="@dimen/_10sdp"
         android:layout_marginBottom="20dp"
+        android:background="@drawable/bg_item"
+        android:ems="5"
+        android:padding="@dimen/_10sdp"
         android:text="@string/IncomeLess"
-        android:textColor="@color/darkBlue"
+        android:textColor="@color/blue"
         android:textSize="@dimen/_15sdp" />
 
 
@@ -85,14 +89,14 @@
         android:id="@+id/Income_middle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg_item"
-        android:ems="5"
         android:layout_above="@+id/Income_above"
         android:layout_marginHorizontal="@dimen/_20sdp"
-        android:padding="@dimen/_10sdp"
         android:layout_marginBottom="20dp"
+        android:background="@drawable/bg_item"
+        android:ems="5"
+        android:padding="@dimen/_10sdp"
         android:text="@string/IncomeMiddle"
-        android:textColor="@color/darkBlue"
+        android:textColor="@color/blue"
         android:textSize="@dimen/_15sdp" />
 
 
@@ -110,14 +114,14 @@
         android:id="@+id/Income_above"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg_item"
-        android:layout_marginHorizontal="@dimen/_20sdp"
         android:layout_above="@+id/btn_nextIncome"
+        android:layout_marginHorizontal="@dimen/_20sdp"
         android:layout_marginBottom="@dimen/_20sdp"
+        android:background="@drawable/bg_item"
         android:ems="5"
         android:padding="@dimen/_10sdp"
         android:text="@string/IncomeAbove"
-        android:textColor="@color/darkBlue"
+        android:textColor="@color/blue"
         android:textSize="@dimen/_15sdp" />
 
     <ImageView

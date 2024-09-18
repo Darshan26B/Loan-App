@@ -10,102 +10,111 @@
     android:gravity="center"
     tools:context=".DetailActivity">
 
-    <androidx.cardview.widget.CardView
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/_5sdp"
-        android:layout_marginBottom="@dimen/_30sdp"
-        app:cardCornerRadius="@dimen/_12sdp"
-        app:cardUseCompatPadding="true">
+        android:gravity="center"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:lineSpacingExtra="@dimen/_4sdp"
+        android:text="@string/details"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_20sdp" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/_50sdp"
+            android:layout_marginHorizontal="@dimen/_10sdp"
             android:padding="@dimen/_10sdp">
 
-            <!-- <com.google.android.material.textfield.TextInputLayout
-                 android:layout_width="match_parent"
-                 android:layout_height="wrap_content"
-                 app:endIconMode="custom"
-                 app:endIconDrawable="@drawable/right"
-                 app:endIconTint="@null"
-                 android:textColorHint="@color/strokeColor"
-                 app:boxStrokeColor="@color/strokeColor">
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColorHint="@color/strokeColor"
+                app:boxStrokeColor="@color/strokeColor"
+                app:endIconDrawable="@drawable/right"
+                android:hint="@string/UserName"
+                app:endIconMode="custom"
+                app:endIconTint="@null">
 
-                 <com.google.android.material.textfield.TextInputEditText
-                     android:id="@+id/Detail_Name"
-                     android:layout_width="match_parent"
-                     android:layout_height="wrap_content"
-                     android:background="@drawable/bg_item"
-                     android:inputType="textPersonName" />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/Detail_Name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusable="false"
+                    android:inputType="none" />
 
-             </com.google.android.material.textfield.TextInputLayout>-->
-            <!--
-              <com.google.android.material.textfield.TextInputLayout
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:hint="@string/UserLastName"
+                android:textColorHint="@color/strokeColor"
+                app:boxStrokeColor="@color/strokeColor"
+                app:endIconDrawable="@drawable/right"
+                app:endIconMode="custom"
+                app:endIconTint="@null">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/Detail_LastName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusable="false"
+                    android:inputType="none" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:hint="@string/UserEmailID"
+                android:textColorHint="@color/strokeColor"
+                app:boxStrokeColor="@color/strokeColor"
+                app:endIconDrawable="@drawable/right"
+                app:endIconMode="custom"
+                app:endIconTint="@null">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/Detail_EmailID"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusable="false"
+                    android:inputType="none" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <!--  <com.google.android.material.textview.MaterialTextView
+                  android:id="@+id/Detail_Name"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:background="@drawable/bg_item"
+                  android:drawableEnd="@drawable/right"
+                  android:padding="@dimen/_13sdp" />
+
+              <com.google.android.material.textview.MaterialTextView
+                  android:id="@+id/Detail_LastName"
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content"
                   android:layout_marginTop="@dimen/_10sdp"
-                  android:hint="@string/UserLastName"
-                  app:endIconMode="custom"
-                  app:endIconDrawable="@drawable/right"
-                  app:endIconTint="@null"
-                  android:textColorHint="@color/strokeColor"
-                  app:boxStrokeColor="@color/strokeColor">
+                  android:background="@drawable/bg_item"
+                  android:drawableEnd="@drawable/right"
+                  android:padding="@dimen/_13sdp" />
 
-                  <com.google.android.material.textfield.TextInputEditText
-                      android:id="@+id/Detail_LastName"
-                      android:layout_width="match_parent"
-                      android:layout_height="wrap_content"
-                      android:background="@drawable/bg_item" />
-
-              </com.google.android.material.textfield.TextInputLayout>-->
-            <!--            <com.google.android.material.textfield.TextInputLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_10sdp"
-                            android:hint="@string/UserEmailID"
-                            app:endIconMode="custom"
-                            app:endIconDrawable="@drawable/right"
-                            app:endIconTint="@null"
-                            android:textColorHint="@color/strokeColor"
-                            app:boxStrokeColor="@color/strokeColor">
-
-                            <com.google.android.material.textfield.TextInputEditText
-                                android:id="@+id/Detail_EmailID"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:background="@drawable/bg_item" />
-
-                        </com.google.android.material.textfield.TextInputLayout>-->
-
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/Detail_Name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/bg_item"
-                android:drawableEnd="@drawable/right"
-                android:padding="@dimen/_13sdp" />
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/Detail_LastName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:background="@drawable/bg_item"
-                android:drawableEnd="@drawable/right"
-                android:padding="@dimen/_13sdp" />
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/Detail_EmailID"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:background="@drawable/bg_item"
-                android:drawableEnd="@drawable/right"
-                android:padding="@dimen/_13sdp" />
-
+              <com.google.android.material.textview.MaterialTextView
+                  android:id="@+id/Detail_EmailID"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_marginTop="@dimen/_10sdp"
+                  android:background="@drawable/bg_item"
+                  android:drawableEnd="@drawable/right"
+                  android:padding="@dimen/_13sdp" />
+  -->
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/txt_InputNumber"
@@ -114,8 +123,6 @@
                 android:layout_marginTop="@dimen/_10sdp"
                 android:hint="@string/UserPhoneNumber"
                 android:textColorHint="@color/strokeColor"
-                app:boxStrokeColor="@color/strokeColor"
-                app:boxStrokeWidth="@dimen/_2sdp"
                 app:endIconDrawable="@drawable/right"
                 app:endIconMode="custom"
                 app:endIconTint="@null">
@@ -124,7 +131,6 @@
                     android:id="@+id/Detail_Number"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/bg_item"
                     android:inputType="number"
                     android:maxLength="10" />
 
@@ -137,8 +143,6 @@
                 android:layout_marginTop="@dimen/_10sdp"
                 android:hint="@string/UserPinCode"
                 android:textColorHint="@color/strokeColor"
-                app:boxStrokeColor="@color/strokeColor"
-                app:boxStrokeWidth="@dimen/_2sdp"
                 app:counterMaxLength="6"
                 app:endIconDrawable="@drawable/right"
                 app:endIconMode="custom"
@@ -148,7 +152,6 @@
                     android:id="@+id/Detail_PinCode"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/bg_item"
                     android:inputType="number"
                     android:maxLength="6" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -196,7 +199,5 @@
                 android:textColor="@color/white"
                 app:cornerRadius="@dimen/_5sdp" />
         </LinearLayout>
-    </androidx.cardview.widget.CardView>
-
 
 </RelativeLayout>

@@ -1,7 +1,8 @@
 <resources>
     <string name="app_name">MY Loan-App</string>
     ------ ************* (MAIN / DETAILS)ACTIVITY ************* ------
-    <string name="welcome">Welcome\n My Loan-App</string>
+    <string name="welcome"><b>Welcome </b></string>
+    <string name="details"><b>Add Details </b></string>
     <string name="send_otp">Send OTP</string>
     <string name="verify_otp">Verify OTP</string>
     <string name="policy">By creating an account you agree to our Terms of Service and Privacy Policy.</string>
@@ -27,13 +28,13 @@
     ------ ************* PROFESSION ACTIVITY ************* ------
     <string name="profession">Select Your Profession</string>
     <string name="salaried"><b>* Salaried</b></string>
-    <string name="sub_salaried">- Receiving monthly income from a job</string>
+    <string name="sub_salaried"> Receiving monthly income from a job</string>
     <string name="employed"><b>* Self-Employed Business or MSME </b></string>
-    <string name="sub_employed">- Business with a valid GST certificate</string>
+    <string name="sub_employed"> Business with a valid GST certificate</string>
     <string name="selfEmployed"><b>* Self-Employed Professional</b></string>
-    <string name="sub_selfEmployed">- Eg. Consultant street vendor,freelancer \tagent practitioner,etc.</string>
+    <string name="sub_selfEmployed"> Eg. Consultant street vendor,freelancer agent practitioner,etc.</string>
     <string name="student"><b>* Student</b></string>
-    <string name="sub_student">- Student from an accredited university \t \tor college.</string>
+    <string name="sub_student"> Student from an accredited university  or college.</string>
     ------ ************* INCOME ACTIVITY ************* ------
     <string name="IncomeNO"><b>No Monthly Income</b></string>
     <string name="IncomeLess"><b>Income Less Than 10000</b></string>
@@ -41,8 +42,18 @@
     <string name="IncomeAbove"><b>15000 &amp;Above</b></string>
     ------ ************* PanCard ACTIVITY ************* ------
     <string name="PanCard"><b>you are at a final step your loan application</b></string>
-    <string name="panCard_Number">PAN CARD Number</string>
+    <string name="panCard_Number">PAN-CARD Number</string>
     <string name="btnSubmit">Submit &amp;Generate Offer</string>
     <string name="btnSkip">Skip</string>
-
+    <string name="income">Select Your Income</string>
+    <string name="profile">Profile</string>
+    <string name="log_out">Log-Out</string>
+    ------ ************* Home ACTIVITY ************* ------
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+    <string name="birth_date">Date of Birth</string>
+    <string name="genderP">Gender</string>
+    <string name="professionP">Profession</string>
+    <string name="incomeP">Monthly Income</string>
+    <string name="btnSubmitP">Submit</string>
 </resources>

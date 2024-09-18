@@ -7,26 +7,35 @@
     android:layout_height="match_parent"
     tools:context=".GenderActivity">
 
-    <TextView
-        android:id="@+id/txt_gender"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/gender_male"
+        android:layout_marginBottom="@dimen/_20sdp"
+        android:gravity="center"
+        android:layout_centerHorizontal="true"
         android:layout_marginHorizontal="@dimen/_15sdp"
-        android:layout_marginBottom="@dimen/_10sdp"
-        android:text="@string/gender"
-        android:textAlignment="center"
-        android:textColor="@color/blue"
-        android:textSize="@dimen/_20sdp"
-        android:textStyle="bold" />
+        android:layout_above="@+id/gender_male">
 
-    <ImageView
-        android:layout_width="@dimen/_40sdp"
-        android:layout_height="@dimen/_40sdp"
-        android:layout_above="@+id/gender_male"
-        android:layout_alignEnd="@+id/txt_gender"
-        android:padding="@dimen/_5sdp"
-        android:src="@drawable/gender" />
+        <TextView
+            android:id="@+id/txt_gender"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginLeft="@dimen/_20sdp"
+            android:textAlignment="center"
+            android:text="@string/gender"
+            android:textColor="@color/blue"
+            android:textSize="@dimen/_20sdp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginEnd="@dimen/_20sdp"
+            android:padding="@dimen/_5sdp"
+            android:src="@drawable/gender" />
+
+    </LinearLayout>
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/gender_male"
@@ -34,13 +43,12 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/gender_feMale"
         android:layout_centerInParent="true"
-        android:layout_marginTop="@dimen/_20sdp"
         android:background="@drawable/bg_item"
         android:ems="5"
         android:padding="@dimen/_5sdp"
         android:text="@string/male"
         android:textAlignment="center"
-        android:textColor="@color/white"
+        android:textColor="@color/blue"
         android:textSize="@dimen/_20sdp" />
 
     <ImageView
@@ -64,7 +72,7 @@
         android:padding="@dimen/_5sdp"
         android:text="@string/female"
         android:textAlignment="center"
-        android:textColor="@color/white"
+        android:textColor="@color/blue"
         android:textSize="@dimen/_20sdp" />
 
     <ImageView
@@ -89,7 +97,7 @@
         android:padding="@dimen/_5sdp"
         android:text="@string/other"
         android:textAlignment="center"
-        android:textColor="@color/white"
+        android:textColor="@color/blue"
         android:textSize="@dimen/_20sdp" />
 
     <ImageView

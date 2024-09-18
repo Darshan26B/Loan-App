@@ -20,13 +20,14 @@ class GenderActivity : AppCompatActivity() {
     private lateinit var male: MaterialTextView
     private lateinit var feMale: MaterialTextView
     private lateinit var other: MaterialTextView
-    private lateinit var rightMale:ImageView
-    private lateinit var rightFeMale :ImageView
-    private lateinit var rightOther :ImageView
+    private lateinit var rightMale: ImageView
+    private lateinit var rightFeMale: ImageView
+    private lateinit var rightOther: ImageView
     private lateinit var next: MaterialButton
     private lateinit var back: TextView
     private lateinit var database: DatabaseReference
     private lateinit var sharePref: SharedPref
+    private var isClicked = false
     var selectedGender: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -68,16 +69,20 @@ class GenderActivity : AppCompatActivity() {
             sharePref.saveData("userNumber", userNumber)
         }
         next.setOnClickListener {
+            if (!isClicked) {
+                isClicked = true
+                if (selectedGender != null) {
+                    database.child(userNumber.toString()).child("gender").setValue(selectedGender)
+                        .addOnSuccessListener {
+                            val intent = Intent(this, ProfessionActivity::class.java)
+                            intent.putExtra("userNumber", userNumber)
+                            startActivity(intent)
 
-            if (selectedGender != null) {
-                database.child(userNumber.toString()).child("gender").setValue(selectedGender)
-                    .addOnSuccessListener {
-                        val intent = Intent(this, ProfessionActivity::class.java)
-                        intent.putExtra("userNumber", userNumber)
-                        startActivity(intent)
-                    }
-            } else {
-                Toast.makeText(this, "Please select a gender", Toast.LENGTH_SHORT).show()
+                        }
+                } else {
+                    isClicked = false
+                    Toast.makeText(this, "Please select a gender", Toast.LENGTH_SHORT).show()
+                }
             }
         }
         back.setOnClickListener {
@@ -120,7 +125,7 @@ class GenderActivity : AppCompatActivity() {
     private fun resetButtonStyles(vararg buttons: MaterialTextView) {
         for (button in buttons) {
             button.setBackgroundResource(R.drawable.bg_item)
-            button.setTextColor(getColor(R.color.white))
+            button.setTextColor(getColor(R.color.blue))
         }
     }
 
@@ -134,6 +139,7 @@ class GenderActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
+        isClicked = false
         selectedGender = sharePref.getData("gender")
         updateSelectedGenderUI(selectedGender)
     }

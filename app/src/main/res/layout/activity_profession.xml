@@ -7,28 +7,36 @@
     android:layout_height="match_parent"
     tools:context=".ProfessionActivity">
 
-    <TextView
-        android:id="@+id/txt_profession"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/relativeLayoutSalary"
-        android:layout_marginHorizontal="@dimen/_15sdp"
         android:layout_marginBottom="@dimen/_20sdp"
-        android:text="@string/profession"
-        android:textAlignment="center"
-        android:textColor="@color/blue"
-        android:paddingEnd="@dimen/_15sdp"
-        android:textSize="@dimen/_20sdp"
-        android:textStyle="bold" />
+        android:layout_marginHorizontal="@dimen/_10sdp"
+        android:gravity="center"
+        android:orientation="horizontal">
 
-    <ImageView
-        android:layout_width="@dimen/_40sdp"
-        android:layout_height="@dimen/_40sdp"
-        android:layout_above="@+id/relativeLayoutSalary"
-        android:layout_marginBottom="@dimen/_10sdp"
-        android:layout_alignEnd="@+id/txt_profession"
-        android:src="@drawable/profession"
-        android:padding="@dimen/_5sdp" />
+        <TextView
+            android:id="@+id/txt_profession"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+          android:layout_marginStart="@dimen/_10sdp"
+            android:layout_weight="1"
+            android:text="@string/profession"
+            android:textColor="@color/blue"
+            android:textSize="@dimen/_20sdp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginEnd="@dimen/_20sdp"
+            android:src="@drawable/profession"
+            android:padding="@dimen/_5sdp" />
+
+    </LinearLayout>
+
+
 
     <RelativeLayout
         android:id="@+id/relativeLayoutSalary"
@@ -46,7 +54,7 @@
             android:ems="5"
             android:padding="@dimen/_5sdp"
             android:text="@string/salaried"
-            android:textColor="@color/darkBlue"
+            android:textColor="@color/blue"
             android:textSize="@dimen/_15sdp" />
 
         <com.google.android.material.textview.MaterialTextView
@@ -56,7 +64,7 @@
             android:layout_below="@id/p_salaried"
             android:ems="5"
             android:text="@string/sub_salaried"
-            android:textColor="@color/darkBlue"
+            android:textColor="@color/blue"
             android:textSize="@dimen/_15sdp" />
 
 
@@ -87,7 +95,7 @@
             android:ems="5"
             android:padding="@dimen/_5sdp"
             android:text="@string/employed"
-            android:textColor="@color/darkBlue"
+            android:textColor="@color/blue"
             android:textSize="@dimen/_15sdp" />
 
         <com.google.android.material.textview.MaterialTextView
@@ -97,7 +105,7 @@
             android:layout_below="@id/p_employed"
             android:ems="5"
             android:text="@string/sub_salaried"
-            android:textColor="@color/darkBlue"
+            android:textColor="@color/blue"
             android:textSize="@dimen/_15sdp" />
 
         <ImageView
@@ -128,7 +136,7 @@
             android:ems="5"
             android:padding="@dimen/_5sdp"
             android:text="@string/selfEmployed"
-            android:textColor="@color/darkBlue"
+            android:textColor="@color/blue"
             android:textSize="@dimen/_15sdp" />
 
         <com.google.android.material.textview.MaterialTextView
@@ -138,7 +146,7 @@
             android:layout_below="@+id/p_SelfEmploy"
             android:ems="5"
             android:text="@string/sub_selfEmployed"
-            android:textColor="@color/darkBlue"
+            android:textColor="@color/blue"
             android:textSize="@dimen/_15sdp" />
 
         <ImageView
@@ -168,7 +176,7 @@
             android:ems="5"
             android:padding="@dimen/_5sdp"
             android:text="@string/student"
-            android:textColor="@color/darkBlue"
+            android:textColor="@color/blue"
             android:textSize="@dimen/_15sdp" />
 
         <com.google.android.material.textview.MaterialTextView
@@ -178,7 +186,7 @@
             android:layout_below="@id/p_Student"
             android:ems="5"
             android:text="@string/sub_student"
-            android:textColor="@color/darkBlue"
+            android:textColor="@color/blue"
             android:textSize="@dimen/_15sdp" />
 
         <ImageView

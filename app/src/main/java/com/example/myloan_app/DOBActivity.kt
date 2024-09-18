@@ -21,6 +21,7 @@ class DOBActivity : AppCompatActivity() {
     private lateinit var btnBack: TextView
     private lateinit var database: DatabaseReference
     private lateinit var sharePref: SharedPref
+    private var isClicked = false
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,10 +47,18 @@ class DOBActivity : AppCompatActivity() {
 
         loadData()
         btnNext.setOnClickListener {
-            if (isDateValid()) {
-                saveDate(userNumber.toString())
-            } else {
-                Toast.makeText(this, "Please select a valid date (18+ years date)", Toast.LENGTH_SHORT).show()
+            if (!isClicked) {
+                isClicked = true
+                if (isDateValid()) {
+                    saveDate(userNumber.toString())
+                } else {
+                    isClicked = false
+                    Toast.makeText(
+                        this,
+                        "Please select a valid date (18+ years date)",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
             }
         }
         btnBack.setOnClickListener {
@@ -84,17 +93,16 @@ class DOBActivity : AppCompatActivity() {
         val selectedYear = dobPicker.year
         val selectedMonth = dobPicker.month
         val selectedDay = dobPicker.dayOfMonth
-
         val today = Calendar.getInstance()
         val eighteenYearsAgo = Calendar.getInstance().apply {
             add(Calendar.YEAR, -18)
         }
-
         val selectedDate = Calendar.getInstance().apply {
             set(selectedYear, selectedMonth, selectedDay)
         }
         return selectedDate.before(eighteenYearsAgo) && !selectedDate.after(today)
     }
+
     private fun saveDate(number: String) {
         val day = dobPicker.dayOfMonth
         val month = dobPicker.month + 1
@@ -103,10 +111,16 @@ class DOBActivity : AppCompatActivity() {
         val selectDate = "$day-$month-$year"
         sharePref.saveData("saveDate", selectDate)
 
-        database.child(number).child("BirthDate").setValue(selectDate)
+        database.child(number).child("birthDate").setValue(selectDate)
             .addOnSuccessListener {
                 val intent = Intent(this, GenderActivity::class.java)
                 startActivity(intent)
             }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        isClicked = false
+
     }
 }

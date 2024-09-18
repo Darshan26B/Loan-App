@@ -38,6 +38,8 @@ class ProfessionActivity : AppCompatActivity() {
     private lateinit var database: DatabaseReference
     private lateinit var sharePref: SharedPref
     private var selectedProfession: String? = null
+    private var selectedSubTitle: String? = null
+    private var isClicked = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -77,44 +79,66 @@ class ProfessionActivity : AppCompatActivity() {
         rightSelfEmploy.visibility = View.INVISIBLE
         rightStudent.visibility = View.INVISIBLE
 
+
         rSalary.setOnClickListener {
-            selectProfession("salary")
-         }
+            selectProfession(
+                getString(R.string.salaried),
+                getString(R.string.sub_salaried)
+            )
+        }
         rEmployed.setOnClickListener {
-            selectProfession("employed")
+            selectProfession(
+                getString(R.string.employed),
+                getString(R.string.sub_employed)
+            )
         }
         rSelfEmploy.setOnClickListener {
-            selectProfession("selfEmploy")
+            selectProfession(
+                getString(R.string.selfEmployed),
+                getString(R.string.sub_selfEmployed)
+            )
         }
         rStudent.setOnClickListener {
-            selectProfession("student")
+            selectProfession(
+                getString(R.string.student),
+                getString(R.string.sub_student)
+            )
         }
-        if (userNumber != null) {
-            sharePref.saveData("userNumber", userNumber)
-        }
-        btnNext.setOnClickListener {
 
-            if (selectedProfession != null) {
-                database.child(userNumber.toString()).child("profession").setValue(selectedProfession)
-                    .addOnSuccessListener {
-                        val intent = Intent(this, IncomeActivity::class.java)
-                        intent.putExtra("userNumber", userNumber)
-                        startActivity(intent)
-                    }
-            } else {
-                Toast.makeText(this, "Please select your Profession", Toast.LENGTH_SHORT).show()
+        btnNext.setOnClickListener {
+            if (!isClicked) {
+                isClicked = true
+                if (selectedProfession != null && selectedSubTitle != null) {
+                    val professionData = HashMap<String, String>()
+                    professionData["profession"] = selectedProfession!!
+                    professionData["subTitle"] = selectedSubTitle!!
+
+                    database.child(userNumber.toString()).child("profession")
+                        .setValue(professionData)
+                        .addOnSuccessListener {
+                            val intent = Intent(this, IncomeActivity::class.java)
+                            intent.putExtra("userNumber", userNumber)
+                            startActivity(intent)
+                        }
+                } else {
+                    isClicked = false
+                    Toast.makeText(this, "Please select your Profession", Toast.LENGTH_SHORT).show()
+                }
             }
         }
         btnBack.setOnClickListener {
             finish()
         }
     }
-    private fun selectProfession(profession: String) {
+
+    private fun selectProfession(profession: String, subTitle: String) {
         selectedProfession = profession
+        selectedSubTitle = subTitle
         sharePref.saveData("profession", profession)
-        resetButtonStyles(salary,subSalary,employed,subEmployed,selfEmploy,subSelfEmploy,student,subStudent)
+        resetButtonStyles(rSalary, rEmployed, rSelfEmploy, rStudent)
+
         when (profession) {
-            "salary" -> {
+            getString(R.string.salaried) -> {
                 rSalary.setBackgroundResource(R.drawable.bg_all_details)
                 salary.setTextColor(getColor(R.color.black))
                 subSalary.setTextColor(getColor(R.color.black))
@@ -124,7 +148,7 @@ class ProfessionActivity : AppCompatActivity() {
                 rightStudent.visibility = View.INVISIBLE
             }
 
-            "employed" -> {
+            getString(R.string.employed) -> {
                 rEmployed.setBackgroundResource(R.drawable.bg_all_details)
                 employed.setTextColor(getColor(R.color.black))
                 subEmployed.setTextColor(getColor(R.color.black))
@@ -132,10 +156,9 @@ class ProfessionActivity : AppCompatActivity() {
                 rightSalary.visibility = View.INVISIBLE
                 rightSelfEmploy.visibility = View.INVISIBLE
                 rightStudent.visibility = View.INVISIBLE
-
             }
 
-            "selfEmploy" -> {
+            getString(R.string.selfEmployed) -> {
                 rSelfEmploy.setBackgroundResource(R.drawable.bg_all_details)
                 selfEmploy.setTextColor(getColor(R.color.black))
                 subSelfEmploy.setTextColor(getColor(R.color.black))
@@ -144,7 +167,8 @@ class ProfessionActivity : AppCompatActivity() {
                 rightEmployed.visibility = View.INVISIBLE
                 rightStudent.visibility = View.INVISIBLE
             }
-            "student" -> {
+
+            getString(R.string.student) -> {
                 rStudent.setBackgroundResource(R.drawable.bg_all_details)
                 student.setTextColor(getColor(R.color.black))
                 subStudent.setTextColor(getColor(R.color.black))
@@ -156,25 +180,59 @@ class ProfessionActivity : AppCompatActivity() {
         }
     }
 
-    private fun resetButtonStyles(vararg buttons: MaterialTextView) {
-        for (button in buttons) {
-            button.setBackgroundResource(R.drawable.bg_item)
-            button.setTextColor(getColor(R.color.white))
+    private fun resetButtonStyles(vararg layouts: RelativeLayout) {
+        for (layout in layouts) {
+
+            layout.setBackgroundResource(R.drawable.bg_item)
+            val salary = layout.findViewById<MaterialTextView>(R.id.p_salaried)
+            val subSalary = layout.findViewById<MaterialTextView>(R.id.p_sub_salaried)
+            val employed = layout.findViewById<MaterialTextView>(R.id.p_employed)
+            val subEmployed = layout.findViewById<MaterialTextView>(R.id.p_sub_employed)
+            val selfEmploy = layout.findViewById<MaterialTextView>(R.id.p_SelfEmploy)
+            val subSelfEmploy = layout.findViewById<MaterialTextView>(R.id.p_sub_selfEmployed)
+            val student = layout.findViewById<MaterialTextView>(R.id.p_Student)
+            val subStudent = layout.findViewById<MaterialTextView>(R.id.p_sub_student)
+
+            salary?.setTextColor(getColor(R.color.blue))
+            subSalary?.setTextColor(getColor(R.color.blue))
+            employed?.setTextColor(getColor(R.color.blue))
+            subEmployed?.setTextColor(getColor(R.color.blue))
+            selfEmploy?.setTextColor(getColor(R.color.blue))
+            subSelfEmploy?.setTextColor(getColor(R.color.blue))
+            student?.setTextColor(getColor(R.color.blue))
+            subStudent?.setTextColor(getColor(R.color.blue))
         }
     }
 
-    private fun updateSelectedProfessionUI(savedGender: String?) {
-        when (savedGender) {
-            "salary" -> selectProfession("salary")
-            "employed" -> selectProfession("employed")
-            "selfEmploy" -> selectProfession("selfEmploy")
-            "student" -> selectProfession("student")
+    private fun updateSelectedProfessionUI(savedProfession: String?, savedSubTitle: String?) {
+        when (savedProfession) {
+            getString(R.string.salaried) -> selectProfession(
+                getString(R.string.salaried),
+                savedSubTitle ?: getString(R.string.sub_salaried)
+            )
+
+            getString(R.string.employed) -> selectProfession(
+                getString(R.string.employed),
+                savedSubTitle ?: getString(R.string.sub_employed)
+            )
+
+            getString(R.string.selfEmployed) -> selectProfession(
+                getString(R.string.selfEmployed),
+                savedSubTitle ?: getString(R.string.sub_selfEmployed)
+            )
+
+            getString(R.string.student) -> selectProfession(
+                getString(R.string.student),
+                savedSubTitle ?: getString(R.string.sub_student)
+            )
         }
     }
 
     override fun onResume() {
         super.onResume()
+        isClicked = false
         selectedProfession = sharePref.getData("profession")
-        updateSelectedProfessionUI(selectedProfession)
+        selectedSubTitle = sharePref.getData("subTitle")
+        updateSelectedProfessionUI(selectedProfession, selectedSubTitle)
     }
 }

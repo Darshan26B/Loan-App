@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -25,6 +26,7 @@ class LoanAmountActivity : AppCompatActivity() {
     private lateinit var database: DatabaseReference
     private lateinit var sharePref: SharedPref
     lateinit var auth: FirebaseAuth
+    private var isClicked = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -72,27 +74,31 @@ class LoanAmountActivity : AppCompatActivity() {
             sharePref.saveData("userNumber", userNumber)
         }
         nextButton.setOnClickListener {
-            val amount = loanAmount.text.toString()
-            sharePref.saveData("loanAmount", amount)
+            if (!isClicked) {
+                isClicked = true
+                val amount = loanAmount.text.toString()
+                sharePref.saveData("loanAmount", amount)
 
-            if (amount.isEmpty()) {
-                loanAmount.error = "Enter a valid loan amount"
-            } else {
-                database.child(userNumber.toString()).child("loanAmount").setValue(amount)
-                    .addOnSuccessListener {
-                        val intent = Intent(this, DOBActivity::class.java)
-                        intent.putExtra("userNumber", userNumber)
-                        startActivity(intent)
-                    }
+                if (amount.isEmpty()) {
+                    isClicked = false
+                    loanAmount.error = "Enter a  loan amount"
+                } else {
+                    database.child(userNumber.toString()).child("loanAmount").setValue(amount)
+                        .addOnSuccessListener {
+                            val intent = Intent(this, DOBActivity::class.java)
+                            intent.putExtra("userNumber", userNumber)
+                            startActivity(intent)
+                        }
+                }
             }
         }
-
         backButton.setOnClickListener {
             finish()
         }
     }
     override fun onResume() {
         super.onResume()
+        isClicked =false
         val savedNumber = sharePref.getData("loanAmount")
         loanAmount.setText(savedNumber)
     }
