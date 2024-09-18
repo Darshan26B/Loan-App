@@ -64,12 +64,13 @@ class ProfileActivity : AppCompatActivity() {
 
         userNumber = (intent.getStringExtra("userNumber") ?: sharePref.getData("userNumber")).toString()
         Log.e("fetchUserData", "userNumber: $userNumber")
-        setNumber = sharePref.getData("setNumber").toString()
-        Log.e("fetchUserData", "setNumber: $setNumber")
+        setNumber = sharePref.getData("userNumber").toString()
+//        Log.e("fetchUserData", "userNumber: $setNumber")
 
 
-            fetchUserData1()
-            Log.e("fetchUserData", "fetchUserData1: "+fetchUserData1())
+            fetchUserData()
+
+//            Log.e("fetchUserData", "fetchUserData1: "+fetchUserData1())
 //        } else {
 //            fetchUserData()
 //            Log.e("fetchUserData", "fetchUserData: "+fetchUserData())
@@ -86,101 +87,58 @@ class ProfileActivity : AppCompatActivity() {
         }
     }
 
+
+
     private fun fetchUserData() {
+        database.child(userNumber).get().addOnSuccessListener {
 
-        database.child(userNumber).addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                if (snapshot.exists()) {
-                    val user = snapshot.value as? Map<String, Any>
 
-                    if (user != null) {
-                        val name = user["name"] as? String ?: ""
-                        val lastName = user["lastName"] as? String ?: ""
-                        val email = user["email"] as? String ?: ""
-                        val number = user["number"] as? String ?: ""
-                        val pinCode = user["pinCode"] as? String ?: ""
-                        val loanAmount = user["loanAmount"] as? String ?: ""
-                        val birthDate = user["birthDate"] as? String ?: ""
-                        val gender = user["gender"] as? String ?: ""
-                        val income = user["income"] as? String ?: ""
 
-                        val professionSnapshot = snapshot.child("profession/profession")
-                        val profession = professionSnapshot.getValue(String::class.java) ?: ""
+            if (userNumber !=null) {
+                database.child(setNumber).get().addOnSuccessListener { snapshot ->
+                    if (snapshot.exists()) {
+                        val user = snapshot.value as HashMap<*, *>
 
-                        val panCardNumber = user["panCardNumber"] as? String ?: "N/A"
-                        val panCardDisplay = if (panCardNumber.isEmpty()) {
-                            "N/A"
-                        } else {
-                            panCardNumber
+                        // Display user data in the profile fields
+                        if (user != null) {
+
+                            val name = user["name"] as? String ?: ""
+                            val lastName = user["lastName"] as? String ?: ""
+                            val email = user["email"] as? String ?: ""
+                            val number = user["number"] as? String ?: ""
+                            val pinCode = user["pinCode"] as? String ?: ""
+                            val loanAmount = user["loanAmount"] as? String ?: ""
+                            val birthDate = user["birthDate"] as? String ?: ""
+                            val gender = user["gender"] as? String ?: ""
+                            val income = user["income"] as? String ?: ""
+                            val professionSnapshot = snapshot.child("profession/profession")
+                            val profession = professionSnapshot.getValue(String::class.java) ?: ""
+
+                            val panCardNumber = user["panCardNumber"] as? String ?: "N/A"
+                            val panCardDisplay = if (panCardNumber.isEmpty()) {
+                                "N/A"
+                            } else {
+                                panCardNumber
+                            }
+
+                            profileName.setText(name)
+                            profileLastName.setText (lastName)
+                            profileEmailID.setText(email)  // Populate DOB
+                            profileNumber.setText(number)  // Populate Loan Amount
+                            profilePinCode.setText(pinCode)
+                            profileLoanAmount.setText(loanAmount)
+                            profileDOB.setText(birthDate)
+                            profileGender.setText(gender)
+                            profileProfession.setText(profession)
+                            profileIncome.setText(income)
+                            profilePanCardNumber.setText(panCardDisplay)
                         }
-
-                        // Set the values in TextInputEditText
-                        profileName.setText(name)
-                        profileLastName.setText(lastName)
-                        profileNumber.setText(number)
-                        profileEmailID.setText(email)
-                        profilePinCode.setText(pinCode)
-                        profileLoanAmount.setText(loanAmount)
-                        profileDOB.setText(birthDate)
-                        profileGender.setText(gender)
-                        profileProfession.setText(profession)
-                        profileIncome.setText(income)
-                        profilePanCardNumber.setText(panCardDisplay)
                     } else {
-                        Toast.makeText(
-                            this@ProfileActivity,
-                            "User data is empty",
-                            Toast.LENGTH_SHORT
-                        ).show()
+                        Toast.makeText(this, "No profile data found!", Toast.LENGTH_SHORT).show()
                     }
-                } else {
-                    Toast.makeText(this@ProfileActivity, "User not found", Toast.LENGTH_SHORT)
-                        .show()
                 }
             }
 
-            override fun onCancelled(error: DatabaseError) {
-                Toast.makeText(this@ProfileActivity, "Failed to load data", Toast.LENGTH_SHORT)
-                    .show()
-            }
-        })
-    }
-
-    private fun fetchUserData1() {
-        database.child(userNumber).get().addOnSuccessListener {
-
-            if (it.exists()) {
-
-                val firstname = it.child("name").value
-                val lastName = it.child("lastName").value
-                val email = it.child("email").value
-                val number = it.child("number").value
-                val pinCode = it.child("pinCode").value
-                val loanAmount = it.child("loanAmount").value
-                val birthDate = it.child("birthDate").value
-                val gender = it.child("gender").value
-                val profession = it.child("profession/profession").value
-                val income = it.child("income").value
-                val  panCardNumber = it.child("panCardNumber").value
-
-                profileName.setText(firstname.toString())
-                profileLastName.setText(lastName.toString())
-                profileDOB.setText(email.toString())
-                profileNumber.setText(number.toString())
-                profilePinCode.setText(pinCode.toString())
-                profileLoanAmount.setText(loanAmount.toString())
-                profileDOB.setText(birthDate.toString())
-                profileGender.setText(gender.toString())
-                profileProfession.setText(profession.toString())
-                profileIncome.setText(income.toString())
-                profilePanCardNumber.setText(panCardNumber.toString())
-
-                Log.e("fetchUserData", "firstname$firstname")
-
-            } else {
-
-                Toast.makeText(this, "User Doesn't Exist", Toast.LENGTH_SHORT).show()
-            }
         }.addOnFailureListener {
 
             Toast.makeText(this, "Failed", Toast.LENGTH_SHORT).show()

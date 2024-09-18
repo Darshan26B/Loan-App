@@ -162,6 +162,7 @@ class DetailActivity : AppCompatActivity() {
         userNumber.setText(savedNumber)
         userPinCode.setText(savedPinCode)
     }
+
     private fun phoneAuth(number: String) {
         val options = PhoneAuthOptions.newBuilder(auth)
             .setPhoneNumber(number)
@@ -203,8 +204,8 @@ class DetailActivity : AppCompatActivity() {
 
                 override fun onCodeSent(p0: String, p1: PhoneAuthProvider.ForceResendingToken) {
                     super.onCodeSent(p0, p1)
-
                     verificationId = p0
+                    Toast.makeText(this@DetailActivity, "OTP SENT", Toast.LENGTH_SHORT).show()
                 }
 
             }).build()

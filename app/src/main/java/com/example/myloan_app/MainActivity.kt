@@ -93,8 +93,6 @@ class MainActivity : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
         userOTP.visibility = View.GONE
 
-
-
         userIconSet()
         val user = auth.currentUser
         if (user != null) {
@@ -242,6 +240,7 @@ class MainActivity : AppCompatActivity() {
                     super.onCodeSent(p0, p1)
 
                     verificationId = p0
+                    Toast.makeText(this@MainActivity, "OTP SENT", Toast.LENGTH_SHORT).show()
                 }
 
             }).build()
@@ -251,51 +250,44 @@ class MainActivity : AppCompatActivity() {
         userVerifyOtp.setOnClickListener {
             val otp = userOTP.otpEditText!!.text.toString()
             val setNumber = userNumber.text.toString()
-            val numberShared = sharedP.getData("userNumber").toString()
-            sharedP.saveData("setNumber", setNumber)
-            if (setNumber == numberShared) {
 
-                val user = User(
-                    userName.text.toString(),
-                    userLastName.text.toString(),
-                    "",
-                    userNumber.text.toString()
-                )
+
                 if (otp.isNotEmpty()) {
                     val credential = PhoneAuthProvider.getCredential(verificationId, otp)
-                    signInWithPhoneAuthCredential(credential)
-
-                    database.child(userNumber.text.toString()).setValue(user).addOnSuccessListener {
-                        val intent = Intent(this, HomePageActivity::class.java)
-//                        intent.putExtra("setNumber",setNumber)
-//                        Log.e("setNumber", " Data: $setNumber")
-                        startActivity(intent)
-                    }
+                    signInWithPhoneAuthCredential(credential,setNumber)
                 } else {
                     Toast.makeText(this, "Please enter OTP", Toast.LENGTH_SHORT).show()
                 }
-            } else {
-                Toast.makeText(this, "Please First Registration", Toast.LENGTH_SHORT).show()
-            }
-
 
         }
     }
 
-    private fun signInWithPhoneAuthCredential(credential: PhoneAuthCredential) {
+    private fun signInWithPhoneAuthCredential(credential: PhoneAuthCredential, setNumber: String) {
         auth.signInWithCredential(credential)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    if (!isClicked) {
-                        isClicked = true
-                        Toast.makeText(this, "OTP Verified", Toast.LENGTH_SHORT).show()
-                    } else {
-                        Toast.makeText(this, "${task.exception}", Toast.LENGTH_SHORT).show()
+
+                    database.child(setNumber).get().addOnSuccessListener { snapshot ->
+                        if (snapshot.exists()) {
+                            val storedNumber = snapshot.child("number").value.toString()
+                            if (setNumber == storedNumber) {
+                                val intent = Intent(this, HomePageActivity::class.java)
+                                sharedP.saveData("userNumber", setNumber)
+                                startActivity(intent)
+                            } else {
+                                Toast.makeText(this, "Number does not match our records. Please register.", Toast.LENGTH_SHORT).show()
+                            }
+                        } else {
+                            Toast.makeText(this, "No user found with this number. Please register.", Toast.LENGTH_SHORT).show()
+                        }
+                    }.addOnFailureListener {
+                        Toast.makeText(this, "Error fetching data from Firebase", Toast.LENGTH_SHORT).show()
                     }
+                } else {
+                    Toast.makeText(this, "Login failed!", Toast.LENGTH_SHORT).show()
                 }
             }
     }
-
     private fun userIconSet() {
         userNumber.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(
