@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.widget.TextView
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -25,7 +24,7 @@ class LoanAmountActivity : AppCompatActivity() {
     private lateinit var backButton: TextView
     private lateinit var database: DatabaseReference
     private lateinit var sharePref: SharedPref
-    lateinit var auth: FirebaseAuth
+    private lateinit var auth: FirebaseAuth
     private var isClicked = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,12 +46,6 @@ class LoanAmountActivity : AppCompatActivity() {
         sharePref = SharedPref(this)
         auth = FirebaseAuth.getInstance()
 
-      /*  val user = auth.currentUser
-        if (user != null) {
-            val intent = Intent(this, DOBActivity::class.java)
-            startActivity(intent)
-        }*/
-
         val userNumber = intent.getStringExtra("userNumber") ?: sharePref.getData("userNumber")
 
         loanAmount.addTextChangedListener(object : TextWatcher {
@@ -66,6 +59,7 @@ class LoanAmountActivity : AppCompatActivity() {
                     loan.endIconMode = TextInputLayout.END_ICON_CUSTOM
                 }
             }
+
             override fun afterTextChanged(s: Editable?) {
             }
         })
@@ -96,9 +90,10 @@ class LoanAmountActivity : AppCompatActivity() {
             finish()
         }
     }
+
     override fun onResume() {
         super.onResume()
-        isClicked =false
+        isClicked = false
         val savedNumber = sharePref.getData("loanAmount")
         loanAmount.setText(savedNumber)
     }

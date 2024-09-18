@@ -1,11 +1,7 @@
 package com.example.myloan_app
 
 import android.content.Intent
-import android.content.SharedPreferences
-import android.content.SharedPreferences.Editor
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
@@ -55,10 +51,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var userPolicyClick: CheckBox
     private lateinit var userOTP: OTPTextView
     private lateinit var sharedP: SharedPref
-    lateinit var auth: FirebaseAuth
-    lateinit var GoogleSignInClient: GoogleSignInClient
+    private lateinit var auth: FirebaseAuth
+    private lateinit var GoogleSignInClient: GoogleSignInClient
     private val RC_SIGN_IN = 100
-    private var isClicked = false
     private lateinit var verificationId: String
 
     override fun onCreate(savedInstanceState: Bundle?) {

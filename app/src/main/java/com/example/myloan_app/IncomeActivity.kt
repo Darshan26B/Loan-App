@@ -97,11 +97,11 @@ class IncomeActivity : AppCompatActivity() {
         }
     }
 
-    private fun selectIncome(Income: String) {
-        selectIncome = Income
-        sharePref.saveData("Income", Income)
+    private fun selectIncome(income: String) {
+        selectIncome = income
+        sharePref.saveData("Income", income)
         resetButtonStyles(noIncome, lessIncome, middleIncome, aboveIncome)
-        when (Income) {
+        when (income) {
             getString(R.string.IncomeNO) -> {
                 noIncome.setBackgroundResource(R.drawable.bg_all_details)
                 noIncome.setTextColor(getColor(R.color.black))

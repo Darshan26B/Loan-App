@@ -1,8 +1,6 @@
 package com.example.myloan_app
 
 import android.content.Context
-import android.content.SharedPreferences
-
 class SharedPref(context: Context) {
 
     private val PREFS_NAME = "MYData"

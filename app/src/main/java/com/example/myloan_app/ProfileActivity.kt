@@ -10,12 +10,8 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
-import kotlin.math.log
 
 class ProfileActivity : AppCompatActivity() {
 
@@ -62,44 +58,25 @@ class ProfileActivity : AppCompatActivity() {
         sharePref = SharedPref(this)
         database = FirebaseDatabase.getInstance().getReference("Users")
 
-        userNumber = (intent.getStringExtra("userNumber") ?: sharePref.getData("userNumber")).toString()
+        userNumber =
+            (intent.getStringExtra("userNumber") ?: sharePref.getData("userNumber")).toString()
         Log.e("fetchUserData", "userNumber: $userNumber")
         setNumber = sharePref.getData("userNumber").toString()
 //        Log.e("fetchUserData", "userNumber: $setNumber")
 
-
-            fetchUserData()
-
-//            Log.e("fetchUserData", "fetchUserData1: "+fetchUserData1())
-//        } else {
-//            fetchUserData()
-//            Log.e("fetchUserData", "fetchUserData: "+fetchUserData())
-//        }
-
-
-//        if (userNumber.isEmpty()) {
-//            fetchUserData()
-//        }
+        fetchUserData()
 
         profileSubmit.setOnClickListener {
             editProfile()
             startActivity(Intent(this, HomePageActivity::class.java))
         }
     }
-
-
-
     private fun fetchUserData() {
         database.child(userNumber).get().addOnSuccessListener {
-
-
-
-            if (userNumber !=null) {
+            if (userNumber != null) {
                 database.child(setNumber).get().addOnSuccessListener { snapshot ->
                     if (snapshot.exists()) {
                         val user = snapshot.value as HashMap<*, *>
-
-                        // Display user data in the profile fields
                         if (user != null) {
 
                             val name = user["name"] as? String ?: ""
@@ -115,16 +92,14 @@ class ProfileActivity : AppCompatActivity() {
                             val profession = professionSnapshot.getValue(String::class.java) ?: ""
 
                             val panCardNumber = user["panCardNumber"] as? String ?: "N/A"
-                            val panCardDisplay = if (panCardNumber.isEmpty()) {
+                            val panCardDisplay = panCardNumber.ifEmpty {
                                 "N/A"
-                            } else {
-                                panCardNumber
                             }
 
                             profileName.setText(name)
-                            profileLastName.setText (lastName)
-                            profileEmailID.setText(email)  // Populate DOB
-                            profileNumber.setText(number)  // Populate Loan Amount
+                            profileLastName.setText(lastName)
+                            profileEmailID.setText(email)
+                            profileNumber.setText(number)
                             profilePinCode.setText(pinCode)
                             profileLoanAmount.setText(loanAmount)
                             profileDOB.setText(birthDate)

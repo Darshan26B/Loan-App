@@ -28,7 +28,7 @@ class GenderActivity : AppCompatActivity() {
     private lateinit var database: DatabaseReference
     private lateinit var sharePref: SharedPref
     private var isClicked = false
-    var selectedGender: String? = null
+    private var selectedGender: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
